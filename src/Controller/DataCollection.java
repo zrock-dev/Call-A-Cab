@@ -36,7 +36,7 @@ public class DataCollection {
     private void askNoPassengers() {
         message.enterNumberPassengers();
 
-        taxiTrip.setPassengers(input.nextInt());
+        taxiTrip.setNoPassengers(input.nextInt());
     }
 
     public void askAllData(){

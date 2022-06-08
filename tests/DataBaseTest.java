@@ -12,18 +12,18 @@ public class DataBaseTest {
         TaxiTrip taxiTrip = dataBase.getTaxiTrip();
 
         try {
-            taxiTrip.setTaxiPlate(taxiPlate);
+            taxiTrip.appointCar(taxiPlate);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
 
         taxiTrip.setCustomerLocation("false Street");
         taxiTrip.setArriveDestination("Sesame Street");
-        taxiTrip.setPassengers(3);
-        taxiTrip.setTotalCost(120);
+        taxiTrip.setNoPassengers(3);
+        taxiTrip.setTotalPrice(120);
 
         try {
-            taxiTrip.saveData();
+            taxiTrip.saveTripTicket();
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -37,18 +37,18 @@ public class DataBaseTest {
         String exceptionMessage = "";
 
         try {
-            taxiTrip.setTaxiPlate(taxiPlate);
+            taxiTrip.appointCar(taxiPlate);
         }catch (Exception e){
             exceptionMessage = e.getMessage();
         }
         taxiTrip.setCustomerLocation("false Street");
         taxiTrip.setArriveDestination("Sesame Street");
-        taxiTrip.setPassengers(3);
-        taxiTrip.setTotalCost(120);
+        taxiTrip.setNoPassengers(3);
+        taxiTrip.setTotalPrice(120);
 
 
         try {
-            taxiTrip.saveData();
+            taxiTrip.saveTripTicket();
         }catch (Exception e){
         }
 
@@ -61,13 +61,13 @@ public class DataBaseTest {
         TaxiTrip taxiTrip = dataBase.getTaxiTrip();
         taxiTrip.setCustomerLocation("false Street");
         taxiTrip.setArriveDestination("Sesame Street");
-        taxiTrip.setPassengers(3);
-        taxiTrip.setTotalCost(120);
+        taxiTrip.setNoPassengers(3);
+        taxiTrip.setTotalPrice(120);
 
         String exceptionMessage = "";
 
         try {
-            taxiTrip.saveData();
+            taxiTrip.saveTripTicket();
         }catch (Exception e){
             exceptionMessage = e.getMessage();
         }

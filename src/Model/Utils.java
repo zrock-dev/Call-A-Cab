@@ -18,4 +18,8 @@ public class Utils {
 
         return resultSet;
     }
+
+    protected static int obtainIdentification(String identificationType){
+        return 0;
+    }
 }
