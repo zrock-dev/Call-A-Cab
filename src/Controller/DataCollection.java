@@ -3,33 +3,39 @@ package Controller;
 import Model.DataBase;
 import Model.TaxiTrip;
 import View.InformationUser;
+import View.OptionInformation;
+
+import java.util.Random;
 import java.util.Scanner;
 
 public class DataCollection {
-    private final InformationUser message;
-    private final Scanner input;
-    private final TaxiTrip taxiTrip;
+    private InformationUser message;
+    private Scanner input;
     private final DataBase dataBase;
+    private TaxiTrip taxiTrip;
+    private double distanceRandom;
 
     public DataCollection() {
-        message  = new InformationUser();
-        input    = new Scanner(System.in);
+        message = new InformationUser();
+        input = new Scanner(System.in);
         dataBase = new DataBase();
         taxiTrip = dataBase.getTaxiTrip();
     }
 
-    public void askCustomerLocation() {
+    private void askCustomerLocation() {
         message.enterLocation();
-        taxiTrip.setCustomerLocation(input.nextLine());
+        String userAnswer = input.next();
+        taxiTrip.setCustomerLocation(userAnswer);
     }
 
-    public void askArriveDestination() {
+    private void askArriveDestination() {
         message.enterDestination();
-        taxiTrip.setArriveDestination(input.nextLine());
+        taxiTrip.setArriveDestination(input.next());
     }
 
-    public void askNoPassengers() {
+    private void askNoPassengers() {
         message.enterNumberPassengers();
+
         taxiTrip.setPassengers(input.nextInt());
     }
 
@@ -44,7 +50,51 @@ public class DataCollection {
                 taxiTrip.getCustomerLocation(),
                 taxiTrip.getArriveDestination(),
                 taxiTrip.getNoPassengers(),
-                10
-        );
+                10);
+    }
+
+    public double GenerateDistance() {
+        Random random = new Random();
+        distanceRandom = random.nextInt(100)+1;
+        return distanceRandom;
+    }
+
+    public double totalBuy() {
+        double total = distanceRandom * taxiTrip.getNoPassengers() * 10;
+        return total;
+    }
+
+
+
+    public void start(){
+        askAllData();
+        showInformation();
+    }
+
+//borrar
+
+    private OptionInformation messages=new OptionInformation();
+    private int selectInformationToChange(){
+        messages.informationChange();
+        return input.nextInt();
+    }
+
+    //fixear
+    public void changeUserInformation(){
+        switch(selectInformationToChange()){
+            case 1:
+                askCustomerLocation();
+                break;
+            case 2:
+                askArriveDestination();
+                break;
+            case 3:
+                askNoPassengers();
+                break;
+            default:
+                messages.showIncorrectSelect();
+                changeUserInformation();
+        }
+        showInformation();
     }
 }

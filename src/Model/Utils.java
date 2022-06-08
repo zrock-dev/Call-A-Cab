@@ -9,7 +9,7 @@ public class Utils {
     protected static Connection dataBaseConnection;
 
     protected static ResultSet grabDataFromDB(String vehiclePlate, String query) throws SQLException{
-       ResultSet resultSet = null;
+        ResultSet resultSet = null;
         PreparedStatement statement = dataBaseConnection.prepareStatement(query);
         statement.setString(1, vehiclePlate);
 

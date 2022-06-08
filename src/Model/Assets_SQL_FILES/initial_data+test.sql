@@ -1,4 +1,3 @@
-USE `Call-a-Cab`;
 
 INSERT INTO Driver (ci, first_name, last_name, phone, gender) value
     (

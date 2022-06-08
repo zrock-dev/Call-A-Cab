@@ -15,7 +15,10 @@ public class CheckInputUser {
     }
 
     public boolean verifyData(String character) {
-        boolean checkData = character.equalsIgnoreCase("Y") || character.equalsIgnoreCase("N");
+        boolean checkData =false;
+        if (character.equalsIgnoreCase("Y")||character.equalsIgnoreCase("N")){
+            checkData =true;
+        }
         return checkData;
     }
 
@@ -43,7 +46,7 @@ public class CheckInputUser {
         }
         return number;
     }
-    
+
 
 }
 

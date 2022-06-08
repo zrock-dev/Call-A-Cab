@@ -81,6 +81,11 @@ public class TaxiTrip {
     /*
         Saves the values of the attributes into the DB
      */
+
+    public int getFirstRecordedTrip(){
+        return 501;
+    }
+
     public void saveData() throws InvalidException {
 
         validateSavingData();

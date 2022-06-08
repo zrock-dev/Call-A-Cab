@@ -1,11 +1,19 @@
-import Controller.Controller;
+import Controller.*;
 import View.Greeting;
+import View.InformationUser;
+
+import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
-        Controller controller = new Controller();
-        Greeting greeting = new Greeting();
+        DataCollection dataCollection= new DataCollection();
+        ValidateInformation validateInformation = new ValidateInformation();
+        Greeting greeting =new Greeting();
         greeting.welcome();
-        controller.start();
+        dataCollection.start();
+        dataCollection.changeUserInformation();
+
+
+
     }
 }

@@ -1,3 +1,5 @@
+create schema `Call-a-Cab`;
+
 -- tables
 -- Table: Driver
 USE `Call-a-Cab`;

@@ -2,53 +2,78 @@ package View;
 
 import View.Utils.Decoration;
 
+import java.util.Scanner;
+
 public class OptionInformation {
 
     Decoration decoration=new Decoration();
+    Scanner input = new Scanner(System.in);
 
     public void informationCorrect(){
-        System.out.print(Decoration.decorationForMessage("▓",124)+"\n"+
-                Decoration.decorationForMessage("=",124)+
-                "\n"+ Decoration.decorationForMessage(" ",40)+
+        System.out.print(decoration.decorationForMessage("▓",124)+"\n"+
+                decoration.decorationForMessage("=",124)+
+                "\n"+ decoration.decorationForMessage(" ",40)+
                 "Is that information correct? Y/N\n"+
-                Decoration.decorationForMessage("=",124)+"\n"+
-                Decoration.decorationForMessage("▓",124)+
+                decoration.decorationForMessage("=",124)+"\n"+
+                decoration.decorationForMessage("▓",124)+
                 "\n>> ");
     }
 
     public void informationChange(){
-        System.out.print("\n"+ Decoration.decorationForMessage("-",54)+
-                "\nWhich information would you like to change?\n" +
-                "1. Location\n" +
-                "2. Arrive Place\n" +
-                "3. No. Passengers\n>>");
+        System.out.print("\n╔"+decoration.decorationForMessage("═",122)+"╗"+
+                "\n"+"║ "+ decoration.decorationForMessage(">", 38)+
+                " Which information would you like to change? " +
+                decoration.decorationForMessage("<", 37)+" ║\n"+
+                "╚"+ decoration.decorationForMessage("═",122)+"╝"+
+                "\n>> 1. Location\n" +
+                ">> 2. Arrive Place\n" +
+                ">> 3. Number of Passengers\n>>");
     }
 
     public void newInformation(){
-        System.out.print("\n"+ Decoration.decorationForMessage("-",54)+
-                "\nPlease, reinsert your new information\n" +
+        System.out.print("\n"+decoration.decorationForMessage("≡",124)+"\n"+"╞ "+
+                decoration.decorationForMessage("‡",41)+
+                " Please, reinsert your new information " +
+                decoration.decorationForMessage("‡",40)+
+                " ╡"+ "\n"+decoration.decorationForMessage("≡",124)+"\n"+
                 ">> " );
     }
 
     public void selectACab(){
-        System.out.print("\n"+ Decoration.decorationForMessage("-",54)+
-                "\nDo you want to select a cab? Y/N\n>>");
+        System.out.print(decoration.decorationForMessage("♦•",62)+
+                "\n│"+decoration.decorationForMessage(" ",45)+
+                " Do you want to select a cab? Y/N"+
+                decoration.decorationForMessage(" ",45)+"│\n"+
+                decoration.decorationForMessage("♦•",62)+"\n>>");
     }
 
     public void cadUnavailable(){
-        System.out.println("\n"+ Decoration.decorationForMessage("-",54)+
-                "\nWe're sorry :(\n" +
-                "Right now, we don't have an available cab.");
+        System.out.println("\n"+decoration.decorationForMessage("≡",124)+
+                "\n"+decoration.decorationForMessage(":○",27)+
+                " We're sorry :( " +decoration.decorationForMessage(":○",27)+"\n"+
+                decoration.decorationForMessage(":○",21)+
+                " Right now, we don't have an available cab"+
+                decoration.decorationForMessage(":○",20)+"\n"+
+                decoration.decorationForMessage("≡",124));
     }
     public void tryAgain(){
-        System.out.print(Decoration.decorationForMessage("-",54)+
-                "\nWould you like to try again: Y/N\n>>");
+        System.out.print("\n"+decoration.decorationForMessage("≡",124)+
+                "\n"+decoration.decorationForMessage(":○",23)+
+                " Would you like to try again: Y/N "+
+                decoration.decorationForMessage(":○",22)+"\n"+
+                decoration.decorationForMessage("≡",124)+
+                "\n>>");
     }
     public void showCorrectOption(){
-        System.out.println("Please enter a Y or N");
+        System.out.print(decoration.decorationForMessage("=•",61) +
+                "\n>> Please enter a Y or N <<\n"+
+                decoration.decorationForMessage("=•",61));
     }
 
     public void showIncorrectSelect(){
-        System.out.println("Please enter correct option");
+        System.out.print(decoration.decorationForMessage("=•",61) +
+                "\n>> Please enter correct option <<\n"+
+                decoration.decorationForMessage("=•",61));
+
     }
 }

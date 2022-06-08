@@ -32,6 +32,9 @@ public class TaxiDriver {
     public void assignTrip() {
         tripStatus = true;
     }
+    public void makeAvailable() {
+        tripStatus = false;
+    }
 
     public void populateDriverInfo (String vehiclePlate){
         try{

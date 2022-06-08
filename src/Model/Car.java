@@ -4,7 +4,12 @@ import java.sql.*;
 
 public class Car {
     private String model, color, vehiclePlate;
-    private boolean available, driver;
+    private boolean tripStatus;
+
+    public Car() {
+        this.tripStatus = false;
+    }
+
 
     public String getModel() {
         return model;
@@ -14,27 +19,25 @@ public class Car {
         return color;
     }
 
+    public void setVehiclePlate(DataBase dataBase){
+        vehiclePlate = dataBase.getTaxiPlate();
+    }
+
     public String getVehiclePlate() {
         return vehiclePlate;
     }
 
-
-    public boolean isAvailable() {
-        return available;
+    public boolean isTaxiOccupied(){
+        return tripStatus;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void assignTrip() {
+        tripStatus = true;
     }
 
-    public boolean isDriver() {
-        return driver;
+    public void makeAvailable() {
+        tripStatus = false;
     }
-
-    public void setDriver(boolean driver) {
-        this.driver = driver;
-    }
-
 
     public void populateCar(String vehiclePlate) {
         try {
