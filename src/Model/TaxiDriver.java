@@ -4,11 +4,14 @@ import java.sql.*;
 
 import static Model.Utils.grabDataFromDB;
 
-public class Driver {
+public class TaxiDriver {
     private String firstName;
     private String lastName;
     private int phoneNumber;
     private String gender;
+    private boolean tripStatus;
+
+   public TaxiDriver(){this.tripStatus = false;}
 
     public String getFirstName() {
         return firstName;
@@ -24,6 +27,10 @@ public class Driver {
 
     public String getGender() {
         return gender;
+    }
+
+    public void assignTrip() {
+        tripStatus = true;
     }
 
     public void populateDriverInfo (String vehiclePlate){
