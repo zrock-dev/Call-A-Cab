@@ -2,99 +2,116 @@ package Model;
 
 import java.sql.*;
 
-import static Model.Utils.dataBaseConnection;
-import static Model.Utils.obtainIdentification;
+class InvalidException extends Exception{
+
+    public InvalidException(String str) {
+        // calling the constructor of parent Exception
+        super(str);
+    }
+}
 
 public class TaxiTrip {
-    // Trip travel data
-    private String customerLocation, arriveDestination;
-    private int noPassengers, totalPrice;
+    private String taxiPlate;
+    private String customerLocation;
+    private String arriveDestination;
+    private int passengers;
+    private int totalCost;
 
-    // Trip transport data
-    private int carIdentifier, driverIdentifier, travelIdentifier;
+    private final Connection dataBaseConnection;
 
+    public TaxiTrip(Connection dataBaseConnection) {
+        taxiPlate = null;
+        this.dataBaseConnection = dataBaseConnection;
+    }
+
+    public String getTaxiPlate() {
+        return taxiPlate;
+    }
 
     public String getCustomerLocation() {
         return customerLocation;
     }
+
     public String getArriveDestination() {
         return arriveDestination;
     }
+
     public int getNoPassengers() {
-        return noPassengers;
+        return passengers;
     }
-    public int getTotalPrice() {
-        return totalPrice;
+
+    public int getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTaxiPlate(String taxiPlate) throws InvalidException {
+        try(CallableStatement statement = dataBaseConnection.prepareCall("{CALL checkTaxiPlate (?, ?)}")) {
+            statement.registerOutParameter(2, Types.BOOLEAN);
+            statement.setString(1, taxiPlate);
+            statement.execute();
+
+            boolean taxiPlateValidity = statement.getBoolean(2);
+            if(taxiPlateValidity){
+                this.taxiPlate = taxiPlate;
+            }else{
+                throw new InvalidException("The plate " + taxiPlate + " can't be found in the database");
+            }
+
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
     }
 
     public void setCustomerLocation(String customerLocation) {
         this.customerLocation = customerLocation;
     }
+
     public void setArriveDestination(String arriveDestination) {
         this.arriveDestination = arriveDestination;
     }
-    public void setNoPassengers(int noPassengers) {
-        this.noPassengers = noPassengers;
-    }
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
+
+    public void setPassengers(int passengers) {
+        this.passengers = passengers;
     }
 
-    public int appointCar(){
-        carIdentifier = obtainIdentification("Car");
-        return carIdentifier;
-    }
-    public int appointDriver(){
-        driverIdentifier = obtainIdentification("Driver");
-        return driverIdentifier;
+    public void setTotalCost(int totalCost) {
+        this.totalCost = totalCost;
     }
 
     /*
         Saves the values of the attributes into the DB
      */
+    public void saveData() throws InvalidException {
 
-    private void saveTravelInformation(){
+        validateSavingData();
+
         try {
-            String query =
-                    "INSERT INTO Travel_information " +
-                    "(customer_location, arrive_destination, no_passengers) " +
-                    "VALUES (?, ?, ?)";
-            PreparedStatement queryValues = dataBaseConnection.prepareStatement(query);
-            queryValues.setString(1, customerLocation);
-            queryValues.setString(2, arriveDestination);
-            queryValues.setInt(3, noPassengers);
-            queryValues.executeUpdate();
-
-            Statement statement = dataBaseConnection.createStatement();
-            String travelIdentifierQuery =
-                    "SELECT Travel_information.id FROM Travel_information " +
-                    "ORDER BY id DESC";
-            ResultSet resultSet = statement.executeQuery(travelIdentifierQuery);
-            resultSet.next();
-            travelIdentifier = resultSet.getInt("id");
-
-        }catch (SQLException exception){
-            exception.printStackTrace();
-        }
-    }
-    
-    public void saveTripTicket(){
-        try {
-            saveTravelInformation();
-
-            String query =
-                    "INSERT INTO Trips " +
-                    "(car_id, driver_id, travel_information_id, total_price) " +
-                    "VALUES ("+
-                            carIdentifier + "," +
-                            driverIdentifier + "," +
-                            travelIdentifier + "," +
-                            totalPrice + ");";
+            String query = "INSERT INTO Taxi_trips " +
+                    "(taxi_plate, Customer_location, arrive_destination, no_passengers, total_price)" +
+                    " VALUES (?, ?, ?, ?, ?)";
+            //   Taxi_Plate varchar(50),
+            //   Customer_location varchar(255) NOT NULL,
+            //   arrive_destination varchar(255) NOT NULL,
+            //   no_passengers integer NOT NULL,
+            //   total_price integer NOT NULL,
             PreparedStatement preparedStatement = dataBaseConnection.prepareStatement(query);
+
+            preparedStatement.setString(1, taxiPlate);
+            preparedStatement.setString(2, customerLocation);
+            preparedStatement.setString(3, arriveDestination);
+            preparedStatement.setInt(4, passengers);
+            preparedStatement.setInt(5, totalCost);
+
             preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
-           exception.printStackTrace();
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    private void validateSavingData() throws InvalidException {
+        if (taxiPlate == null){
+            throw new InvalidException("Taxi plate can't be null");
         }
     }
 }

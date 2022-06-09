@@ -26,11 +26,11 @@ public class ValidateInformation {
     }
 
     private String checkCorrectLetter(String userOption){
-        boolean checker = checkInputUser.verifyData(userOption);
+        boolean checker = checkInputUser.verifyYOrN(userOption);
         while(!checker){
             message.showCorrectOption();
             userOption = input.nextLine();
-            checker = checkInputUser.verifyData(userOption);
+            checker = checkInputUser.verifyYOrN(userOption);
         }
         return userOption;
     }

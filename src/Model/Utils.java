@@ -1,23 +1,21 @@
 package Model;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Random;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Utils {
     protected static Connection dataBaseConnection;
 
-    protected static int obtainIdentification(String identificationType){
-        int identifier = 0;
-        String query = "SELECT id FROM "+ identificationType +" ORDER BY rand() LIMIT 1";
+    protected static ResultSet grabDataFromDB(String vehiclePlate, String query) throws SQLException{
+       ResultSet resultSet = null;
+        PreparedStatement statement = dataBaseConnection.prepareStatement(query);
+        statement.setString(1, vehiclePlate);
 
-        try(ResultSet queryResult = dataBaseConnection.createStatement().executeQuery(query) ){
-            queryResult.next();
-            identifier = queryResult.getInt("id");
+        resultSet = statement.executeQuery();
+        resultSet.next();
 
-        }catch (SQLException exception){
-            exception.printStackTrace();
-        }
-        return identifier;
+        return resultSet;
     }
 }

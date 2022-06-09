@@ -1,42 +1,43 @@
 package Controller;
 
+import Controller.util.CheckInputUser;
 import Model.DataBase;
 import Model.TaxiTrip;
-import View.InformationUser;
-import View.OptionInformation;
-
-import java.util.Random;
+import View.*;
 import java.util.Scanner;
 
 public class DataCollection {
-    private InformationUser message;
+    private InformationUser informationUser;
     private Scanner input;
     private final DataBase dataBase;
     private TaxiTrip taxiTrip;
-    private double distanceRandom;
+    private OptionInformation optionInformation;
+    private CheckInputUser checkInputUser;
+    private Greeting greeting;
 
     public DataCollection() {
-        message = new InformationUser();
+        informationUser = new InformationUser();
         input = new Scanner(System.in);
         dataBase = new DataBase();
-        taxiTrip = new TaxiTrip();
+        taxiTrip = dataBase.getTaxiTrip();
+        optionInformation = new OptionInformation();
+        checkInputUser=new CheckInputUser();
+        greeting = new Greeting();
     }
 
     private void askCustomerLocation() {
-        message.enterLocation();
-        String userAnswer = input.next();
-        taxiTrip.setCustomerLocation(userAnswer);
+        informationUser.enterLocation();
+        taxiTrip.setCustomerLocation(input.next());
     }
 
     private void askArriveDestination() {
-        message.enterDestination();
+        informationUser.enterDestination();
         taxiTrip.setArriveDestination(input.next());
     }
 
     private void askNoPassengers() {
-        message.enterNumberPassengers();
-
-        taxiTrip.setNoPassengers(input.nextInt());
+        informationUser.enterNumberPassengers();
+        taxiTrip.setPassengers(input.nextInt());
     }
 
     public void askAllData(){
@@ -46,41 +47,25 @@ public class DataCollection {
     }
 
     public void showInformation() {
-        message.tripInformation(
+        informationUser.tripInformation(
                 taxiTrip.getCustomerLocation(),
                 taxiTrip.getArriveDestination(),
                 taxiTrip.getNoPassengers(),
                 10);
     }
 
-    public double GenerateDistance() {
-        Random random = new Random();
-        distanceRandom = random.nextInt(100)+1;
-        return distanceRandom;
-    }
-
-    public double totalBuy() {
-        double total = distanceRandom * taxiTrip.getNoPassengers() * 10;
-        return total;
-    }
-
-
-
     public void start(){
+        greeting.welcome();
         askAllData();
-        showInformation();
+        receiveInformation();
     }
 
-//borrar
-
-    private OptionInformation messages=new OptionInformation();
     private int selectInformationToChange(){
-        messages.informationChange();
+        optionInformation.informationChange();
         return input.nextInt();
     }
 
-    //fixear
-    public void changeUserInformation(){
+    private void changeUserInformation(){
         switch(selectInformationToChange()){
             case 1:
                 askCustomerLocation();
@@ -92,9 +77,24 @@ public class DataCollection {
                 askNoPassengers();
                 break;
             default:
-                messages.showIncorrectSelect();
+                optionInformation.showIncorrectSelect();
                 changeUserInformation();
         }
+    }
+
+    private String verifyInformation(){
         showInformation();
+        return checkInputUser.receiveYOrN();
+    }
+
+    private void receiveInformation(){
+        String optionSelected=verifyInformation();
+        if (optionSelected.equalsIgnoreCase("Y")) {
+            System.out.println("Llamar método de Santiago y Emanuel");
+        }
+        else{
+            changeUserInformation();
+            receiveInformation();
+        }
     }
 }

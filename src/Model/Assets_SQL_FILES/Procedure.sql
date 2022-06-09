@@ -1,21 +1,21 @@
 
-
+# Create procedure to check if the taxi_id exists
 DELIMITER //
-# Procedure to get the number of drivers in the data base.
---
-CREATE PROCEDURE getDriversQuantity(OUT driversAmount int)
+CREATE PROCEDURE checkTaxiPlate(taxi_Plate varchar(50), OUT plateValidity tinyint(1))
 BEGIN
-    SELECT COUNT(Driver.id) FROM Driver INTO driversAmount;
+    SELECT IF(taxi_Plate IN (SELECT Plate FROM Taxi), true, false) INTO plateValidity;
 END;
-// DELIMITER ;
-
+//
+DELIMITER ;
 DELIMITER //
-# Procedure to get a random identifier
-CREATE PROCEDURE provideIdentifier(IN table_name varchar(50), OUT identifier integer)
+# To get driver status
+CREATE PROCEDURE checkDriver(
+    IN taxi_Plate varchar(50),
+    OUT plateValidity boolean)
 BEGIN
-    SET @TableName = table_name;
-    SELECT id FROM @TableName  ORDER BY rand() LIMIT 1 INTO identifier;
+    DECLARE driver varchar(20);
+    SET driver = (SELECT Driver_Id FROM Taxi WHERE Plate=taxi_Plate);
+    SELECT IF(driver IS NOT NULL, true, false) INTO plateValidity;
 END;
-// DELIMITER ;
-
-CALL provideIdentifier('Driver', 2);
+//
+DELIMITER ;

@@ -1,5 +1,6 @@
 package Controller.util;
 
+import View.InformationUser;
 import View.OptionInformation;
 
 import java.util.Scanner;
@@ -8,13 +9,15 @@ public class CheckInputUser {
 
     Scanner input;
     OptionInformation message;
+    InformationUser informationUser;
 
     public CheckInputUser(){
         input = new Scanner(System.in);
         message=new OptionInformation();
+        informationUser=new InformationUser();
     }
 
-    public boolean verifyData(String character) {
+    public boolean verifyYOrN(String character) {
         boolean checkData =false;
         if (character.equalsIgnoreCase("Y")||character.equalsIgnoreCase("N")){
             checkData =true;
@@ -45,6 +48,19 @@ public class CheckInputUser {
             checkNumber=verifyNumberInsideRange(number,1,3);
         }
         return number;
+    }
+
+    public String receiveYOrN(){
+        boolean checkLetter = false;
+        String letterReceived="";
+
+        do {
+            informationUser.yesOrNo();
+            letterReceived=input.next();
+            checkLetter = verifyYOrN(letterReceived);
+        }while(!checkLetter);
+
+        return letterReceived;
     }
 
 
