@@ -2,8 +2,7 @@ package Model;
 
 import java.sql.*;
 
-import static Model.Utils.grabDataFromDB;
-
+import static Model.Utils.dataBaseConnection;
 public class TaxiDriver {
     private String firstName;
     private String lastName;
@@ -24,22 +23,20 @@ public class TaxiDriver {
     }
 
 
-    public void populateDriver(String driverIdentification){
+    public void populateDriver(int DriverIdentification){
         try{
-            String query = "SELECT driver.first_name, driver.last_name, driver.phone, driver.gender " +
-                    "FROM Taxi " +
-                    "INNER JOIN Driver driver on Taxi.Driver_Id = driver.CI "+
-                    "WHERE Taxi.Plate = ?";
+            String query = "SELECT Driver.first_name, Driver.last_name, Driver.phone, Driver.gender " +
+                    "FROM Driver " +
+                    "WHERE Driver.id = " + DriverIdentification + ";";
+            ResultSet resultSet = dataBaseConnection.createStatement().executeQuery(query);
+            resultSet.next();
 
-            try (ResultSet resultSet = grabDataFromDB(driverIdentification, query)) {
-
-                firstName = resultSet.getString("first_name");
-                lastName = resultSet.getString("last_name");
-                phoneNumber = resultSet.getInt("phone");
-                gender = resultSet.getString("gender");
-            }
+            firstName = resultSet.getString("first_name");
+            lastName = resultSet.getString("last_name");
+            phoneNumber = resultSet.getInt("phone");
+            gender = resultSet.getString("gender");
         }catch (SQLException exception){
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         }
     }
 }

@@ -2,31 +2,17 @@ package Model;
 
 import java.sql.*;
 
+import static Model.Utils.dataBaseConnection;
 import static Model.Utils.obtainIdentification;
-
-class InvalidException extends Exception{
-
-    public InvalidException(String str) {
-        // calling the constructor of parent Exception
-        super(str);
-    }
-}
 
 public class TaxiTrip {
     // Trip travel data
     private String customerLocation, arriveDestination;
-    private int noPassengers;
-    private int totalPrice;
+    private int noPassengers, totalPrice;
 
     // Trip transport data
     private int carIdentifier, driverIdentifier, travelIdentifier;
 
-    // Database connection
-    private final Connection dataBaseConnection;
-
-    public TaxiTrip(Connection dataBaseConnection) {
-        this.dataBaseConnection = dataBaseConnection;
-    }
 
     public String getCustomerLocation() {
         return customerLocation;
@@ -39,14 +25,6 @@ public class TaxiTrip {
     }
     public int getTotalPrice() {
         return totalPrice;
-    }
-
-    public void appointCar(){
-        carIdentifier = obtainIdentification("car");
-    }
-
-    public void appointDriver(){
-        driverIdentifier = obtainIdentification("driver");
     }
 
     public void setCustomerLocation(String customerLocation) {
@@ -62,6 +40,15 @@ public class TaxiTrip {
         this.totalPrice = totalPrice;
     }
 
+    public int appointCar(){
+        carIdentifier = obtainIdentification("Car");
+        return carIdentifier;
+    }
+    public int appointDriver(){
+        driverIdentifier = obtainIdentification("Driver");
+        return driverIdentifier;
+    }
+
     /*
         Saves the values of the attributes into the DB
      */
@@ -71,7 +58,7 @@ public class TaxiTrip {
             String query =
                     "INSERT INTO Travel_information " +
                     "(customer_location, arrive_destination, no_passengers) " +
-                    "VALUES (?, ?, ?, ?)";
+                    "VALUES (?, ?, ?)";
             PreparedStatement queryValues = dataBaseConnection.prepareStatement(query);
             queryValues.setString(1, customerLocation);
             queryValues.setString(2, arriveDestination);
@@ -87,7 +74,7 @@ public class TaxiTrip {
             travelIdentifier = resultSet.getInt("id");
 
         }catch (SQLException exception){
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         }
     }
     
@@ -96,18 +83,18 @@ public class TaxiTrip {
             saveTravelInformation();
 
             String query =
-                    "INSERT INTO Taxi_trips " +
-                    "(Car_id, Driver_id, Travel_information_id, total_price) " +
-                    "VALUES (?, ?, ?, ?)";
+                    "INSERT INTO Trips " +
+                    "(car_id, driver_id, travel_information_id, total_price) " +
+                    "VALUES ("+
+                            carIdentifier + "," +
+                            driverIdentifier + "," +
+                            travelIdentifier + "," +
+                            totalPrice + ");";
             PreparedStatement preparedStatement = dataBaseConnection.prepareStatement(query);
-            preparedStatement.setInt(1, carIdentifier);
-            preparedStatement.setInt(2, driverIdentifier);
-            preparedStatement.setInt(3, travelIdentifier);
-            preparedStatement.setInt(3, totalPrice);
             preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
+           exception.printStackTrace();
         }
     }
 }

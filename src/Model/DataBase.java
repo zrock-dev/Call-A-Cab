@@ -1,24 +1,16 @@
 package Model;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class DataBase {
     private Connection dataBaseConnection;
     private ResultSet  resultSet;
     private Statement statement;
 
-
-    TaxiTrip taxiTrip;
-    Car car;
-
     public DataBase(){
         dataBaseConnection = null;
         statement = null;
         resultSet = null;
         establishConnection();
-        instanceTaxiTrip();
         connectUtils();
     }
 
@@ -33,16 +25,12 @@ public class DataBase {
 
             statement = dataBaseConnection.createStatement();
         }catch (SQLException ex){
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
     private void connectUtils(){
         Utils.dataBaseConnection = dataBaseConnection;
-    }
-
-    private void instanceTaxiTrip(){
-        taxiTrip = new TaxiTrip(dataBaseConnection);
     }
 
     public int getDriversAmount(){
@@ -53,14 +41,8 @@ public class DataBase {
             driversAmount = statement.getInt(1);
 
         }catch (SQLException exception){
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         }
         return driversAmount;
     }
-
-
-    public TaxiTrip getTaxiTrip(){
-        return taxiTrip;
-    }
-
 }

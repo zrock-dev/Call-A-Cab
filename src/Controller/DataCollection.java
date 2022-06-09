@@ -19,7 +19,7 @@ public class DataCollection {
         message = new InformationUser();
         input = new Scanner(System.in);
         dataBase = new DataBase();
-        taxiTrip = dataBase.getTaxiTrip();
+        taxiTrip = new TaxiTrip();
     }
 
     private void askCustomerLocation() {

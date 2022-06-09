@@ -1,9 +1,10 @@
 package Model;
 
 import java.sql.*;
+import static Model.Utils.dataBaseConnection;
 
 public class Car {
-    private String model, color, vehiclePlate;
+    private String model, color, carType , licencePlate;
 
     public String getModel() {
         return model;
@@ -11,24 +12,28 @@ public class Car {
     public String getColor() {
         return color;
     }
-    public String getVehiclePlate() {
-        return vehiclePlate;
+    public String getLicencePlate() {
+        return licencePlate;
+    }
+    public String getCarType() {
+        return carType;
     }
 
-    public void populateCar(String vehiclePlate) {
+    public void populateCar(int identifier) {
         try {
-            String query = "SELECT specs.model, specs.color, specs.type " +
-                    "FROM Taxi taxi " +
-                    "INNER JOIN Taxi_specs specs ON taxi.taxi_specs_id = specs.id " +
-                    "WHERE taxi.Plate = ?";
+            String query = "SELECT model, color, type, licence_plate " +
+                    "FROM Car " +
+                    "WHERE Car.id = " + identifier + ";";
+            ResultSet resultSet = dataBaseConnection.createStatement().executeQuery(query);
+            resultSet.next();
 
-            try(ResultSet resultSet = Utils.grabDataFromDB(vehiclePlate, query)){
-                model = resultSet.getString("Model");
-                color = resultSet.getString("Color");
-//              carType = resultSet.getString("Type");
-            }
+            model = resultSet.getString("model");
+            color = resultSet.getString("color");
+            carType = resultSet.getString("type");
+            licencePlate = resultSet.getString("licence_plate");
+
         } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         }
     }
 }
