@@ -5,21 +5,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TripsManagerTest {
+    TripsManager tripsManager = new TripsManager();
+    TaxiTrip trip = tripsManager.getTaxiTrip();
 
-
-    public TaxiTrip fixInitialData(){
-        TaxiTrip trip = new TaxiTrip();
+    public void fixInitialData(){
         trip.setCustomerLocation("Eguino");
         trip.setArriveDestination("PLaza Murillo");
         trip.setNoPassengers(10);
         trip.setTotalPrice(10);
-        return trip;
     }
 
     @Test
     void everythingWorking(){
-        TaxiTrip trip = fixInitialData();
-        TripsManager tripsManager = new TripsManager(trip);
         fixInitialData();
         tripsManager.attemptTrip();
     }

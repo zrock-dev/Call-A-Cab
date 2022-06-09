@@ -7,21 +7,25 @@ import View.*;
 import java.util.Scanner;
 
 public class DataCollection {
-    private InformationUser informationUser;
     private Scanner input;
-    private final DataBase dataBase;
-    private TaxiTrip taxiTrip;
-    private OptionInformation optionInformation;
     private CheckInputUser checkInputUser;
+
+    // Model
+    private TaxiTrip taxiTrip;
+    private TripsManager tripsManager;
+
+    // View
+    private InformationUser informationUser;
+    private OptionInformation optionInformation;
     private Greeting greeting;
 
     public DataCollection() {
+        tripsManager = new TripsManager();
+        checkInputUser = new CheckInputUser();
         informationUser = new InformationUser();
         input = new Scanner(System.in);
-        dataBase = new DataBase();
-        taxiTrip = dataBase.getTaxiTrip();
+        taxiTrip = tripsManager.getTaxiTrip();
         optionInformation = new OptionInformation();
-        checkInputUser=new CheckInputUser();
         greeting = new Greeting();
     }
 
@@ -37,7 +41,7 @@ public class DataCollection {
 
     private void askNoPassengers() {
         informationUser.enterNumberPassengers();
-        taxiTrip.setPassengers(input.nextInt());
+        taxiTrip.setNoPassengers(input.nextInt());
     }
 
     public void askAllData(){
@@ -88,9 +92,9 @@ public class DataCollection {
     }
 
     private void receiveInformation(){
-        String optionSelected=verifyInformation();
+        String optionSelected = verifyInformation();
         if (optionSelected.equalsIgnoreCase("Y")) {
-            System.out.println("Llamar método de Santiago y Emanuel");
+            tripsManager.attemptTrip();
         }
         else{
             changeUserInformation();

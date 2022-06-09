@@ -1064,168 +1064,178 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <user id="289" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="290" parent="274" name="Car">
+    <routine id="290" parent="274" name="getDriversQuantity">
+      <Definer>root@localhost</Definer>
+      <RoutineKind>procedure</RoutineKind>
+      <SourceTextLength>69</SourceTextLength>
+    </routine>
+    <table id="291" parent="274" name="Car">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="291" parent="274" name="Driver">
+    <table id="292" parent="274" name="Driver">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="292" parent="274" name="Travel_information">
+    <table id="293" parent="274" name="Travel_information">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="293" parent="274" name="Trips">
+    <table id="294" parent="274" name="Trips">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="294" parent="290" name="id">
+    <argument id="295" parent="290" name="driversAmount">
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>int|0s</DataType>
+      <Position>1</Position>
+    </argument>
+    <column id="296" parent="291" name="id">
       <AutoIncrement>20</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="295" parent="290" name="model">
+    <column id="297" parent="291" name="model">
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="296" parent="290" name="color">
+    <column id="298" parent="291" name="color">
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="297" parent="290" name="type">
+    <column id="299" parent="291" name="type">
       <DataType>varchar(50)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="298" parent="290" name="licence_plate">
+    <column id="300" parent="291" name="licence_plate">
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <key id="299" parent="290" name="PRIMARY">
+    <key id="301" parent="291" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="300" parent="291" name="id">
+    <column id="302" parent="292" name="id">
       <AutoIncrement>10</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="301" parent="291" name="first_name">
+    <column id="303" parent="292" name="first_name">
       <DataType>varchar(125)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="302" parent="291" name="last_name">
+    <column id="304" parent="292" name="last_name">
       <DataType>varchar(125)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="303" parent="291" name="phone">
+    <column id="305" parent="292" name="phone">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="304" parent="291" name="gender">
+    <column id="306" parent="292" name="gender">
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="305" parent="291" name="experience">
+    <column id="307" parent="292" name="experience">
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
       <Position>6</Position>
     </column>
-    <key id="306" parent="291" name="PRIMARY">
+    <key id="308" parent="292" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="307" parent="292" name="id">
+    <column id="309" parent="293" name="id">
       <AutoIncrement>30</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="308" parent="292" name="customer_location">
+    <column id="310" parent="293" name="customer_location">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="309" parent="292" name="arrive_destination">
+    <column id="311" parent="293" name="arrive_destination">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="310" parent="292" name="no_passengers">
+    <column id="312" parent="293" name="no_passengers">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <key id="311" parent="292" name="PRIMARY">
+    <key id="313" parent="293" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="312" parent="293" name="id">
+    <column id="314" parent="294" name="id">
       <AutoIncrement>40</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="313" parent="293" name="car_id">
+    <column id="315" parent="294" name="car_id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="314" parent="293" name="driver_id">
+    <column id="316" parent="294" name="driver_id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="315" parent="293" name="travel_information_id">
+    <column id="317" parent="294" name="travel_information_id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="316" parent="293" name="total_price">
+    <column id="318" parent="294" name="total_price">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <foreign-key id="317" parent="293" name="Trips_ibfk_1">
+    <foreign-key id="319" parent="294" name="Trips_ibfk_1">
       <ColNames>car_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>Driver</RefTableName>
-    </foreign-key>
-    <foreign-key id="318" parent="293" name="Trips_ibfk_2">
-      <ColNames>driver_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>Car</RefTableName>
     </foreign-key>
-    <foreign-key id="319" parent="293" name="Trips_ibfk_3">
+    <foreign-key id="320" parent="294" name="Trips_ibfk_2">
+      <ColNames>driver_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>Driver</RefTableName>
+    </foreign-key>
+    <foreign-key id="321" parent="294" name="Trips_ibfk_3">
       <ColNames>travel_information_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>Travel_information</RefTableName>
     </foreign-key>
-    <index id="320" parent="293" name="car_id">
+    <index id="322" parent="294" name="car_id">
       <ColNames>car_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="321" parent="293" name="driver_id">
+    <index id="323" parent="294" name="driver_id">
       <ColNames>driver_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="322" parent="293" name="travel_information_id">
+    <index id="324" parent="294" name="travel_information_id">
       <ColNames>travel_information_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="323" parent="293" name="PRIMARY">
+    <key id="325" parent="294" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
