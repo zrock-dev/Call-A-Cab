@@ -6,7 +6,7 @@ import Model.TaxiTrip;
 
 public class TripsManager {
     private int tripsLimit;
-    private DataBase dataBase;
+    private final DataBase dataBase;
     private final TaxiTrip taxiTrip;
     private final Car car;
     private final TaxiDriver driver;
@@ -26,6 +26,7 @@ public class TripsManager {
     public void attemptTrip(){
         if (tripsLimit > 0){
             manualTrip();
+            tripsLimit--;
 
         } else {
             // show "we don't have any cars"

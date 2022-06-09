@@ -4,6 +4,7 @@ import java.sql.*;
 import static Model.Utils.dataBaseConnection;
 
 public class Car {
+    private int carIdentification;
     private String model, color, carType , licencePlate;
 
     public String getModel() {
@@ -18,6 +19,9 @@ public class Car {
     public String getCarType() {
         return carType;
     }
+    public int getCarIdentification() {
+        return carIdentification;
+    }
 
     public void populateCar(int identifier) {
         try {
@@ -27,6 +31,7 @@ public class Car {
             ResultSet resultSet = dataBaseConnection.createStatement().executeQuery(query);
             resultSet.next();
 
+            carIdentification = identifier;
             model = resultSet.getString("model");
             color = resultSet.getString("color");
             carType = resultSet.getString("type");
