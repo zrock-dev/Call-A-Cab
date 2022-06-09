@@ -1,8 +1,7 @@
 package Controller;
 
 import Controller.util.CheckInputUser;
-import Model.DataBase;
-import Model.TaxiTrip;
+import Model.TravelDetails;
 import View.*;
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ public class DataCollection {
     private CheckInputUser checkInputUser;
 
     // Model
-    private TaxiTrip taxiTrip;
+    private TravelDetails travelDetails;
     private TripsManager tripsManager;
 
     // View
@@ -24,24 +23,25 @@ public class DataCollection {
         checkInputUser = new CheckInputUser();
         informationUser = new InformationUser();
         input = new Scanner(System.in);
-        taxiTrip = tripsManager.getTaxiTrip();
         optionInformation = new OptionInformation();
         greeting = new Greeting();
+        
+        travelDetails = tripsManager.getTravelDetails();
     }
 
     private void askCustomerLocation() {
         informationUser.enterLocation();
-        taxiTrip.setCustomerLocation(input.next());
+        travelDetails.setCustomerLocation(input.next());
     }
 
     private void askArriveDestination() {
         informationUser.enterDestination();
-        taxiTrip.setArriveDestination(input.next());
+        travelDetails.setArriveDestination(input.next());
     }
 
     private void askNoPassengers() {
         informationUser.enterNumberPassengers();
-        taxiTrip.setNoPassengers(input.nextInt());
+        travelDetails.setNoPassengers(input.nextInt());
     }
 
     public void askAllData(){
@@ -52,9 +52,9 @@ public class DataCollection {
 
     public void showInformation() {
         informationUser.tripInformation(
-                taxiTrip.getCustomerLocation(),
-                taxiTrip.getArriveDestination(),
-                taxiTrip.getNoPassengers(),
+                travelDetails.getCustomerLocation(),
+                travelDetails.getArriveDestination(),
+                travelDetails.getNoPassengers(),
                 10);
     }
 
@@ -94,7 +94,7 @@ public class DataCollection {
     private void receiveInformation(){
         String optionSelected = verifyInformation();
         if (optionSelected.equalsIgnoreCase("Y")) {
-            tripsManager.attemptTrip();
+            tripsManager.requestTrip();
         }
         else{
             changeUserInformation();

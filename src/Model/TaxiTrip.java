@@ -6,39 +6,9 @@ import static Model.Utils.dataBaseConnection;
 import static Model.Utils.obtainIdentification;
 
 public class TaxiTrip {
-    // Trip travel data
-    private String customerLocation, arriveDestination;
-    private int noPassengers, totalPrice;
 
-    // Trip transport data
-    private int carIdentifier, driverIdentifier, travelIdentifier;
+    private int carIdentifier, driverIdentifier, travelIdentifier, totalPrice;
 
-
-    public String getCustomerLocation() {
-        return customerLocation;
-    }
-    public String getArriveDestination() {
-        return arriveDestination;
-    }
-    public int getNoPassengers() {
-        return noPassengers;
-    }
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setCustomerLocation(String customerLocation) {
-        this.customerLocation = customerLocation;
-    }
-    public void setArriveDestination(String arriveDestination) {
-        this.arriveDestination = arriveDestination;
-    }
-    public void setNoPassengers(int noPassengers) {
-        this.noPassengers = noPassengers;
-    }
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 
     public int appointCar(){
         carIdentifier = obtainIdentification("Car");
@@ -49,39 +19,16 @@ public class TaxiTrip {
         return driverIdentifier;
     }
 
-    /*
-        Saves the values of the attributes into the DB
-     */
-
-    private void saveTravelInformation(){
-        try {
-            String query =
-                    "INSERT INTO Travel_information " +
-                    "(customer_location, arrive_destination, no_passengers) " +
-                    "VALUES (?, ?, ?)";
-            PreparedStatement queryValues = dataBaseConnection.prepareStatement(query);
-            queryValues.setString(1, customerLocation);
-            queryValues.setString(2, arriveDestination);
-            queryValues.setInt(3, noPassengers);
-            queryValues.executeUpdate();
-
-            Statement statement = dataBaseConnection.createStatement();
-            String travelIdentifierQuery =
-                    "SELECT Travel_information.id FROM Travel_information " +
-                    "ORDER BY id DESC";
-            ResultSet resultSet = statement.executeQuery(travelIdentifierQuery);
-            resultSet.next();
-            travelIdentifier = resultSet.getInt("id");
-
-        }catch (SQLException exception){
-            exception.printStackTrace();
-        }
+    public void linkTravelDetails(int travelIdentifier){
+        this.travelIdentifier = travelIdentifier;
     }
-    
-    public void saveTripTicket(){
-        try {
-            saveTravelInformation();
 
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void uploadTripTicket(){
+        try {
             String query =
                     "INSERT INTO Trips " +
                     "(car_id, driver_id, travel_information_id, total_price) " +

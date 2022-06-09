@@ -38,10 +38,10 @@ public class OptionInformation {
 
     }
 
-    public void cadUnavailable(){
-        System.out.println(Colors.RED+ "\n"+decoration.decorationForMessage("≡")+
+    public void cabUnavailable(){
+        System.out.println(Colors.RED+ "\n"+ decoration.decorationForMessage("≡")+
                 decoration.decorationForMessage(":○",27)+
-                " We're sorry :( " +decoration.decorationForMessage(":○",27)+"\n"+
+                " We're sorry :( " + decoration.decorationForMessage(":○",27)+"\n"+
                 decoration.decorationForMessage(":○",21)+
                 " Right now, we don't have an available cab"+
                 decoration.decorationForMessage(":○",20)+"\n"+

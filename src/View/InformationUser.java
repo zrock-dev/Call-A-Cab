@@ -14,11 +14,11 @@ public class InformationUser {
         System.out.print(Colors.GREEN+decoration.decorationForMessage("▓")+
                 "Is that information correct?" + "\n"+
                 decoration.decorationForMessage("=") +
-                "| Location:\t\t\t   "+location
+                "| Location:\t\t\t   " + location
                 + "\n| Destination:  " + arriveDestination
                 + "\n| Number of Passengers:      " + passengers + "\n"+
                 decoration.decorationForMessage("=")+
-                "| Total cost($):       " +cost+"\n"+
+                "| Total cost($):       " + cost+"\n"+
                 decoration.decorationForMessage("▓"));
     }
     public void messageToEnterUserData(){

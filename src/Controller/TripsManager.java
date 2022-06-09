@@ -1,21 +1,27 @@
 package Controller;
-import Model.Car;
-import Model.DataBase;
-import Model.TaxiDriver;
-import Model.TaxiTrip;
+import Model.*;
+import View.OptionInformation;
 
 public class TripsManager {
+    // Model
     private int tripsLimit;
     private final DataBase dataBase;
     private final TaxiTrip taxiTrip;
+    private final TravelDetails travelDetails;
     private final Car car;
     private final TaxiDriver driver;
 
+    // View
+    OptionInformation message;
+
     public TripsManager() {
         dataBase = new DataBase();
-        this.car = new Car();
-        this.taxiTrip = new TaxiTrip();
-        this.driver = new TaxiDriver();
+        taxiTrip = new TaxiTrip();
+        travelDetails = new TravelDetails();
+        driver = new TaxiDriver();
+        car = new Car();
+        message = new OptionInformation();
+
         calculateTripsLimit();
     }
 
@@ -23,27 +29,38 @@ public class TripsManager {
         return taxiTrip;
     }
 
+    public TravelDetails getTravelDetails() {
+        return travelDetails;
+    }
+
+    protected void setTotalPrice(int totalPrice){
+        taxiTrip.setTotalPrice(totalPrice);
+    }
+
     private void calculateTripsLimit(){
         tripsLimit = dataBase.getDriversAmount();
     }
 
-    public void attemptTrip(){
+    public void requestTrip(){
         if (tripsLimit > 0){
-            manualTrip();
+            bookTrip();
             tripsLimit--;
 
         } else {
-            // show "we don't have any cars"
+           message.cabUnavailable();
+           message.tryAgain();
         }
     }
 
-    public void manualTrip(){
+    protected void bookTrip(){
         int carIdentifier = taxiTrip.appointCar();
         int driverIdentifier = taxiTrip.appointDriver();
+        int travelDetailsId = travelDetails.uploadTravelDetails();
 
         car.populateCar(carIdentifier);
         driver.populateDriver(driverIdentifier);
+        taxiTrip.linkTravelDetails(travelDetailsId);
 
-        taxiTrip.saveTripTicket();
+        taxiTrip.uploadTripTicket();
     }
 }

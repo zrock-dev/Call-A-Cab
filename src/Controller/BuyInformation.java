@@ -5,21 +5,20 @@ import Model.TaxiTrip;
 import java.util.Random;
 
 
-    public class BuyInformation {
+public class BuyInformation {
 
-        private double distanceRandom;
-        TaxiTrip taxiTrip;
-
-
-        public double GenerateDistance() {
-            Random random = new Random();
-            distanceRandom = random.nextInt(100)+1;
-            return distanceRandom;
-        }
+    private double distanceRandom;
+    TaxiTrip taxiTrip;
 
 
-        public double totalBuy() {
-            double total = distanceRandom * taxiTrip.getNoPassengers() * 10;
-            return total;
-        }
+    public double GenerateDistance() {
+        Random random = new Random();
+        distanceRandom = random.nextInt(100)+1;
+        return distanceRandom;
+    }
+
+
+    public double totalBuy() {
+        return distanceRandom * taxiTrip.getNoPassengers() * 10;
+    }
 }
