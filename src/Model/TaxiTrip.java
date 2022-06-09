@@ -2,21 +2,24 @@ package Model;
 
 import java.sql.*;
 
-import static Model.Utils.dataBaseConnection;
-import static Model.Utils.obtainIdentification;
+import static Model.Utils.*;
 
 public class TaxiTrip {
 
     private int carIdentifier, driverIdentifier, travelIdentifier, totalPrice;
-
+    private int taxiIdentification;
 
     public int appointCar(){
-        carIdentifier = obtainIdentification("Car");
+        carIdentifier = obtainRandomAppointment("Car");
         return carIdentifier;
     }
     public int appointDriver(){
-        driverIdentifier = obtainIdentification("Driver");
+        driverIdentifier = obtainRandomAppointment("Driver");
         return driverIdentifier;
+    }
+
+    public int getTaxiIdentification() {
+        return taxiIdentification;
     }
 
     public void linkTravelDetails(int travelIdentifier){
@@ -39,6 +42,8 @@ public class TaxiTrip {
                             totalPrice + ");";
             PreparedStatement preparedStatement = dataBaseConnection.prepareStatement(query);
             preparedStatement.executeUpdate();
+
+            travelIdentifier = obtainIdentifier("Trips");
 
         } catch (SQLException exception) {
            exception.printStackTrace();

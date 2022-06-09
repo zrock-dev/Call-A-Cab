@@ -1,11 +1,10 @@
 package Model;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import static Model.Utils.dataBaseConnection;
+import static Model.Utils.obtainIdentifier;
 
 public class TravelDetails {
     private String customerLocation, arriveDestination;
@@ -45,13 +44,7 @@ public class TravelDetails {
             queryValues.setInt(3, noPassengers);
             queryValues.executeUpdate();
 
-            Statement statement = dataBaseConnection.createStatement();
-            String travelIdentifierQuery =
-                    "SELECT Travel_information.id FROM Travel_information " +
-                            "ORDER BY id DESC";
-            ResultSet resultSet = statement.executeQuery(travelIdentifierQuery);
-            resultSet.next();
-            travelIdentifier = resultSet.getInt("id");
+            travelIdentifier = obtainIdentifier("Travel_information");
 
         }catch (SQLException exception){
             exception.printStackTrace();

@@ -2,7 +2,6 @@ package Controller.util;
 
 import View.InformationUser;
 import View.OptionInformation;
-
 import java.util.Scanner;
 
 public class CheckInputUser {
@@ -52,11 +51,11 @@ public class CheckInputUser {
 
     public String receiveYOrN(){
         boolean checkLetter = false;
-        String letterReceived="";
+        String letterReceived = "";
 
         do {
             informationUser.yesOrNo();
-            letterReceived=input.next();
+            letterReceived = input.next();
             checkLetter = verifyYOrN(letterReceived);
         }while(!checkLetter);
 

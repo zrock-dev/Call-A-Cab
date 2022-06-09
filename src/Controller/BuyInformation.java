@@ -1,15 +1,10 @@
 package Controller;
 
-import Model.TaxiTrip;
-
 import java.util.Random;
-
+import static Controller.ModelConnections.travelDetails;
 
 public class BuyInformation {
-
     private double distanceRandom;
-    TaxiTrip taxiTrip;
-
 
     public double GenerateDistance() {
         Random random = new Random();
@@ -17,8 +12,7 @@ public class BuyInformation {
         return distanceRandom;
     }
 
-
     public double totalBuy() {
-        return distanceRandom * taxiTrip.getNoPassengers() * 10;
+        return distanceRandom * travelDetails.getNoPassengers() * 10;
     }
 }

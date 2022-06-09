@@ -1,16 +1,14 @@
 package Controller;
 
 import Controller.util.CheckInputUser;
-import Model.TravelDetails;
 import View.*;
 import java.util.Scanner;
+
+import static Controller.ModelConnections.travelDetails;
 
 public class DataCollection {
     private Scanner input;
     private CheckInputUser checkInputUser;
-
-    // Model
-    private TravelDetails travelDetails;
     private TripsManager tripsManager;
 
     // View
@@ -25,8 +23,6 @@ public class DataCollection {
         input = new Scanner(System.in);
         optionInformation = new OptionInformation();
         greeting = new Greeting();
-        
-        travelDetails = tripsManager.getTravelDetails();
     }
 
     private void askCustomerLocation() {

@@ -1,40 +1,16 @@
 package Controller;
-import Model.*;
+
 import View.OptionInformation;
+import static Controller.ModelConnections.*;
 
 public class TripsManager {
-    // Model
-    private int tripsLimit;
-    private final DataBase dataBase;
-    private final TaxiTrip taxiTrip;
-    private final TravelDetails travelDetails;
-    private final Car car;
-    private final TaxiDriver driver;
-
+    int tripsLimit;
     // View
     OptionInformation message;
 
     public TripsManager() {
-        dataBase = new DataBase();
-        taxiTrip = new TaxiTrip();
-        travelDetails = new TravelDetails();
-        driver = new TaxiDriver();
-        car = new Car();
         message = new OptionInformation();
-
         calculateTripsLimit();
-    }
-
-    public TaxiTrip getTaxiTrip() {
-        return taxiTrip;
-    }
-
-    public TravelDetails getTravelDetails() {
-        return travelDetails;
-    }
-
-    protected void setTotalPrice(int totalPrice){
-        taxiTrip.setTotalPrice(totalPrice);
     }
 
     private void calculateTripsLimit(){
