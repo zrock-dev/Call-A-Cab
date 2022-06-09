@@ -1,22 +1,21 @@
-USE `Call-a-Cab`;
 
-# Create procedure to check if the taxi_id exists
-CREATE PROCEDURE checkTaxiPlate(taxi_Plate varchar(50), OUT plateValidity tinyint(1))
+
+DELIMITER //
+# Procedure to get the number of drivers in the data base.
+--
+CREATE PROCEDURE getDriversQuantity(OUT driversAmount int)
 BEGIN
-    SELECT IF(taxi_Plate IN (SELECT Plate FROM Taxi), true, false) INTO plateValidity;
+    SELECT COUNT(Driver.id) FROM Driver INTO driversAmount;
 END;
+// DELIMITER ;
 
-
-# To get driver status
-CREATE PROCEDURE checkDriver(
-    IN taxi_Plate varchar(50),
-    OUT plateValidity boolean)
+DELIMITER //
+# Procedure to get a random identifier
+CREATE PROCEDURE provideIdentifier(IN table_name varchar(50), OUT identifier integer)
 BEGIN
-    DECLARE driver varchar(20);
-    SET driver = (SELECT Driver_Id FROM Taxi WHERE Plate=taxi_Plate);
-    SELECT IF(driver IS NOT NULL, true, false) INTO plateValidity;
+    SET @TableName = table_name;
+    SELECT id FROM @TableName  ORDER BY rand() LIMIT 1 INTO identifier;
 END;
+// DELIMITER ;
 
-# CALL checkTaxiPlate('2G00D');
-# CALL checkDriver('200D');
-# CALL getCarInformation('2G00D');
+CALL provideIdentifier('Driver', 2);

@@ -1,35 +1,32 @@
 package View;
 
-import static View.Utils.Decoration.decorationForMessage;
+import View.Utils.Decoration;
 
 public class Greeting {
 
-    public void welcome() {
+    Decoration decoration=new Decoration();
+    InformationUser informationUser = new InformationUser();
+    public void welcome(){
         System.out.println(
-                decorationForMessage("▓") +
-                decorationForMessage("=") +
-                decorationForMessage("❉", 45) +
-                " Welcome to our Call-A-Cab System\n " +
-                decorationForMessage("❉", 45) +
-                decorationForMessage("=") +
-                decorationForMessage("▓")
-        );
+                decoration.decorationForMessage("▓",124)+"\n"+
+                        decoration.decorationForMessage("♦",124)+
+                        "\n"+ decoration.decorationForMessage("❉",45)+
+                        " Welcome to our Call-A-Cab System " +
+                        decoration.decorationForMessage("❉",45)+"\n"
+                        +decoration.decorationForMessage("♦",124)+"\n"+
+                        decoration.decorationForMessage("▓",124));
+        informationUser.messageToEnterUserData();
     }
 
-    public void farewell() {
-        System.out.println(
-                decorationForMessage("▓") +
-                decorationForMessage("✫") +
-                decorationForMessage("▓") +
-                decorationForMessage("=") +
-                decorationForMessage("❉", 34) +
+    public void farewell(){
+        System.out.println("\n"+
+                decoration.decorationForMessage("▓",124)+"\n"+
+                decoration.decorationForMessage("♦",124)+
+                "\n"+ decoration.decorationForMessage("❉",34)+
                 " Thank you for choosing us, we hope you have a nice day " +
-                decorationForMessage("❉", 34) +
-                decorationForMessage("=") +
-                decorationForMessage("▓") +
-                decorationForMessage("✫") +
-                decorationForMessage("▓")
-        );
+                decoration.decorationForMessage("❉",34)+"\n"
+                +decoration.decorationForMessage("♦",124)+"\n"+
+                decoration.decorationForMessage("▓",124)+"\n");
     }
 
 }
