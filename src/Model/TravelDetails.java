@@ -6,6 +6,11 @@ import java.sql.SQLException;
 import static Model.Utils.dataBaseConnection;
 import static Model.Utils.obtainIdentifier;
 
+/**
+ * This class sets and returns all the travel's details.
+ * Returns Customer Location, Arrive Destination and N° passengers.
+ * Sets Customer locations, Arrive Destination and N° passengers.
+ */
 public class TravelDetails {
     private String customerLocation, arriveDestination;
     private int noPassengers;

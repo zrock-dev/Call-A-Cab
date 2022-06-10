@@ -10,9 +10,9 @@ public class InformationUser {
     Scanner input= new Scanner(System.in);
     Decoration decoration=new Decoration();
 
-    public void tripInformation(String location, String arriveDestination, int passengers, int cost){
+    public void showTripDetails(String location, String arriveDestination, int passengers, double cost){
         System.out.print(Colors.GREEN+decoration.decorationForMessage("▓")+
-                "Is that information correct?" + "\n"+
+                "Are these details correct?" + "\n"+
                 decoration.decorationForMessage("=") +
                 "| Location:\t\t\t   " + location
                 + "\n| Destination:  " + arriveDestination
@@ -39,27 +39,19 @@ public class InformationUser {
     public void enterNumberPassengers(){
         System.out.print(Colors.PURPLE+">> Number of passengers: ");
     }
+
     public void yesOrNo(){
         System.out.print("Y/N: ");
     }
 
-    public void tipsAndCritiques(){
-        System.out.print(Colors.BLUE+ "\n"+decoration.decorationForMessage("▓")+
-                decoration.decorationForMessage("=")+
-                decoration.decorationForMessage("•~•",18)+ " Tips & Critiques "+
-                decoration.decorationForMessage("•~•",17)+"\n"+
-                decoration.decorationForMessage("=")+
-                decoration.decorationForMessage("▓")+
-                "1. Give the driver a tip.\n" +
-                "2. Write your opinion about the travel.\n"+
-                decoration.decorationForMessage("=")+">>");
-    }
+
+
 
     public void aboutTheTrip() {
         System.out.print(Colors.RESET+ "\n"+decoration.decorationForMessage("▓")+
                 decoration.decorationForMessage("=")+
                 decoration.decorationForMessage("○•",22)+
-                " What do you think about the Travel " +
+                    " What do you think about the Travel " +
                 decoration.decorationForMessage("○•",22)+"\n"+
                 decoration.decorationForMessage("=")+
                 decoration.decorationForMessage("▓")+

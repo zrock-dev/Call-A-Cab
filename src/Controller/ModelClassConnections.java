@@ -2,14 +2,14 @@ package Controller;
 
 import Model.*;
 
-public class ModelConnections {
+public class ModelClassConnections {
     protected static DataBase dataBase;
     protected static TaxiTrip taxiTrip;
     protected static TravelDetails travelDetails;
     protected static TaxiDriver driver;
     protected static Car car;
 
-    protected static void initClasses(){
+    public static void initClasses(){
         dataBase = new DataBase();
         taxiTrip = new TaxiTrip();
         travelDetails = new TravelDetails();

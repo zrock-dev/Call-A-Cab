@@ -2,25 +2,26 @@ package Controller;
 
 import org.junit.jupiter.api.Test;
 
-import static Controller.ModelConnections.taxiTrip;
-import static Controller.ModelConnections.travelDetails;
+import static Controller.ModelClassConnections.taxiTrip;
+import static Controller.ModelClassConnections.travelDetails;
 
 class TripsManagerTest {
 
     public void fixInitialData(){
-        ModelConnections.initClasses();
-        travelDetails.setCustomerLocation("Calle Homero");
-        travelDetails.setArriveDestination("PLaza Alcanzar");
-        travelDetails.setNoPassengers(10);
+        ModelClassConnections.initClasses();
+        travelDetails.setCustomerLocation("street");
+        travelDetails.setArriveDestination("MainStreet");
+        travelDetails.setNoPassengers(100);
         taxiTrip.setTotalPrice(10);
     }
 
     @Test
-    void everythingWorking(){
+    void everythingWorking() throws NoMoreDrivers {
         fixInitialData();
-        TripsManager tripsManager = new TripsManager();
-        for (int i = 0; i < 4; i++) {
-            tripsManager.requestTrip();
-        }
+//        TripsManager tripsManager = new TripsManager();
+//        for (int i = 0; i < 4; i++) {
+//            tripsManager.requestTrip();
+//            System.out.println("\n\n");
+//        }
     }
 }

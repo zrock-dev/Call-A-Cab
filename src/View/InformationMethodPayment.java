@@ -3,9 +3,12 @@ package View;
 import View.Utils.Colors;
 import View.Utils.Decoration;
 
+import java.util.Scanner;
+
 public class InformationMethodPayment {
 
     Decoration decoration=new Decoration();
+    Scanner input = new Scanner(System.in);
 
     public void paymentMethod(){
         System.out.print(Colors.PURPLE + "\n"+ decoration.decorationForMessage("░")+
@@ -19,6 +22,7 @@ public class InformationMethodPayment {
                 decoration.decorationForMessage("░")+
                 decoration.decorationForMessage("=",124)+
                 "\n>>");
+        int payOption = input.nextInt();
     }
 
     public void tipping(){
@@ -28,7 +32,4 @@ public class InformationMethodPayment {
                 decoration.decorationForMessage("=")+
                 ">> ");
     }
-
-
-
 }

@@ -1,4 +1,6 @@
 package Model;
+
+import Controller.ModelClassConnections;
 import java.sql.*;
 
 public class DataBase {
@@ -27,10 +29,12 @@ public class DataBase {
         }catch (SQLException ex){
             ex.printStackTrace();
         }
+
     }
 
     private void connectUtils(){
         Utils.dataBaseConnection = dataBaseConnection;
+        ModelClassConnections.initClasses();
     }
 
     public int getDriversAmount(){
