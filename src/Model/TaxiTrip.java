@@ -3,6 +3,7 @@ package Model;
 import java.sql.*;
 
 import static Model.Utils.*;
+import static Model.Utils.travelDetailsIdentifier;
 
 /**
  * This class assigns a Taxi to  a trip.
@@ -11,7 +12,7 @@ import static Model.Utils.*;
  */
 public class TaxiTrip {
 
-    private int carIdentifier, driverIdentifier, travelIdentifier, totalPrice;
+    private int carIdentifier, driverIdentifier, totalPrice;
 
     /**
      * This method assigns a trip to a random car.
@@ -28,14 +29,6 @@ public class TaxiTrip {
     public int appointDriver(){
         driverIdentifier = obtainRandomAppointment("Driver");
         return driverIdentifier;
-    }
-
-    /**
-     * This class sets the travel identifier.
-     * @param travelIdentifier
-     */
-    public void linkTravelDetails(int travelIdentifier){
-        this.travelIdentifier = travelIdentifier;
     }
 
     /**
@@ -57,12 +50,10 @@ public class TaxiTrip {
                     "VALUES ("+
                             carIdentifier + "," +
                             driverIdentifier + "," +
-                            travelIdentifier + "," +
+                            travelDetailsIdentifier + "," +
                             totalPrice + ");";
             PreparedStatement preparedStatement = dataBaseConnection.prepareStatement(query);
             preparedStatement.executeUpdate();
-
-            travelIdentifier = obtainIdentifier("Trips");
 
         } catch (SQLException exception) {
            exception.printStackTrace();

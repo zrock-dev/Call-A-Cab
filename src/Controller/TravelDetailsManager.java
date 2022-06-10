@@ -15,10 +15,12 @@ public class TravelDetailsManager {
     private InformationUser informationUser;
     private OptionInformation optionInformation;
     private InformationTrip informationTrip;
+    private Greeting greeting;
 
     public TravelDetailsManager() {
         ModelClassConnections.initClasses();
 
+        greeting = new Greeting();
         checkInputUser = new CheckInputUser();
         informationUser = new InformationUser();
         input = new Scanner(System.in);
@@ -26,7 +28,7 @@ public class TravelDetailsManager {
         informationTrip = new InformationTrip();
     }
 
-    public void inputTravelDetails(){
+    private void inputTravelDetails(){
         inputCustomerLocation();
         inputArriveDestination();
         inputNoPassengers();
@@ -84,12 +86,13 @@ public class TravelDetailsManager {
         }
     }
 
-    public void run(TripsManager tripsManager){
+    public void run(){
+        greeting.welcome();
         inputTravelDetails();
         while (askUserConfirmation().equalsIgnoreCase("N")){
             processUserChoice();
         }
-        tripsManager.run();
+        travelDetails.uploadTravelDetails();
     }
 
     //Review
@@ -99,7 +102,7 @@ public class TravelDetailsManager {
         return checkInputUser.askUserDecision();
     }
 
-    public void validateAskAnotherCab(){
+    protected void validateAskAnotherCab(){
         if(askIfWantsAnotherCab().equalsIgnoreCase("Y")){
             //start
         }

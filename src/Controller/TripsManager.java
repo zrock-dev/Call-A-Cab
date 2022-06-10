@@ -7,24 +7,25 @@ class LimitReachedException extends Exception{
 }
 
 public class TripsManager {
+    private boolean stageReadyToContinue;
+
     int tripsLimit;
     // View
     private OptionInformation optionInformation;
-    private InformationMethodPayment informationMethodPayment;
+    private MenuPayment menuPayment;
     private InformationTrip informationTrip;
     private CheckInputUser checkInputUser;
-    private TravelDetailsManager travelDetailsManager;
 
-     public TripsManager(TravelDetailsManager travelDetailsManager) {
-         this.travelDetailsManager = travelDetailsManager;
+     public TripsManager() {
         optionInformation = new OptionInformation();
-        informationMethodPayment = new InformationMethodPayment();
+        menuPayment = new MenuPayment();
         informationTrip = new InformationTrip();
-    }
+        checkInputUser = new CheckInputUser();
+         calculateTripsLimit();
+     }
 
 
     public void run(){
-        calculateTripsLimit();
         try {
             requestTrip();
         }catch (LimitReachedException exception){
@@ -33,13 +34,19 @@ public class TripsManager {
             }
         }
         
-        // trip ticket
+        printTripTicket();
         // choose payment method
-        // Do you need another cab?
+        informationTrip.earlyArrivalNotification(driver, car);
 
-        if (checkInputUser.askUserDecision().equalsIgnoreCase("Y")){
-            travelDetailsManager.run(this);
+        if (checkInputUser.askUserDecision().equalsIgnoreCase("N")){
+            stageReadyToContinue = true;
+        }else {
+            stageReadyToContinue = false;
         }
+    }
+
+    public boolean isStageReadyToMoveOn(){
+         return stageReadyToContinue;
     }
 
     private void calculateTripsLimit(){
@@ -64,12 +71,9 @@ public class TripsManager {
     protected void scheduleTrip(){
         int carIdentifier = taxiTrip.appointCar();
         int driverIdentifier = taxiTrip.appointDriver();
-        int travelDetailsId = travelDetails.uploadTravelDetails();
 
         car.populateCar(carIdentifier);
         driver.populateDriver(driverIdentifier);
-        taxiTrip.linkTravelDetails(travelDetailsId);
-
         taxiTrip.uploadTripTicket();
     }
 
@@ -78,7 +82,7 @@ public class TripsManager {
     }
 
     protected void selectPaymentMethod(){
-        informationMethodPayment.paymentMethod();
+        menuPayment.showMenu();
     }
 
 

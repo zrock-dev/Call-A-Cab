@@ -19,7 +19,7 @@ public class CheckInputUser {
     protected String askUserDecision(){
         String userDecision;
         do {
-            informationUser.yesOrNo();
+            informationUser.showYorNotInteraction();
             userDecision = input.next();
         }while(!validateInput(userDecision));
 

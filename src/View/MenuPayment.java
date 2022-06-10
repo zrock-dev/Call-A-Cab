@@ -5,12 +5,12 @@ import View.Utils.Decoration;
 
 import java.util.Scanner;
 
-public class InformationMethodPayment {
+public class MenuPayment {
 
     Decoration decoration=new Decoration();
     Scanner input = new Scanner(System.in);
 
-    public void paymentMethod(){
+    public void showMenu(){
         System.out.print(Colors.PURPLE + "\n"+ decoration.decorationForMessage("░")+
                 decoration.decorationForMessage("»",50) +
                 "| Choose payment method |"+decoration.decorationForMessage("«",49) +"\n"+
@@ -25,7 +25,7 @@ public class InformationMethodPayment {
         int payOption = input.nextInt();
     }
 
-    public void tipping(){
+    public void selectedTipInteraction(){
         System.out.println(Colors.YELLOW_BOLD+ "\n"+decoration.decorationForMessage("=")+
                 decoration.decorationForMessage(" ",48)+
                 "How much do you want to tip?" +"\n"+

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import static Model.Utils.dataBaseConnection;
 import static Model.Utils.obtainIdentifier;
+import static Model.Utils.travelDetailsIdentifier;
 
 /**
  * This class sets and returns all the travel's details.
@@ -35,8 +36,7 @@ public class TravelDetails {
         this.noPassengers = noPassengers;
     }
 
-    public int uploadTravelDetails(){
-        int travelIdentifier = 0;
+    public void uploadTravelDetails(){
 
         try {
             String query =
@@ -49,12 +49,10 @@ public class TravelDetails {
             queryValues.setInt(3, noPassengers);
             queryValues.executeUpdate();
 
-            travelIdentifier = obtainIdentifier("Travel_information");
+            travelDetailsIdentifier = obtainIdentifier("Travel_information");
 
         }catch (SQLException exception){
             exception.printStackTrace();
         }
-
-        return travelIdentifier;
     }
 }

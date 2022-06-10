@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class Utils {
     protected static Connection dataBaseConnection;
+    protected static int travelDetailsIdentifier;
 
     protected static int obtainRandomAppointment(String identificationType){
         int identifier = 0;

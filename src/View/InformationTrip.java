@@ -5,7 +5,7 @@ import View.Utils.*;
 
 public class InformationTrip {
 
-    Decoration decoration=new Decoration();
+    Decoration decoration = new Decoration();
 
     public void earlyArrivalNotification(TaxiDriver driver, Car car) {
         System.out.println(Colors.RESET+ decoration.decorationForMessage("≡", 125)+"\n"+
@@ -39,9 +39,9 @@ public class InformationTrip {
                 decoration.decorationForMessage("»°",62)+"\n"+
                 decoration.decorationForMessage("=")+
                 ">> Car model:" + car.getModel()+
-                "\n>> Plate:    "+ car.getLicencePlate()+
-                "\n>> Type:     "+ car.getCarType()+
-                "\n>> Color:    "+ car.getColor()+"\n"+
+                "\n>> Plate:    " + car.getLicencePlate()+
+                "\n>> Type:     " + car.getCarType()+
+                "\n>> Color:    " + car.getColor()+"\n"+
                 decoration.decorationForMessage("≡", 124));
     }
 

@@ -40,7 +40,7 @@ public class InformationUser {
         System.out.print(Colors.PURPLE+">> Number of passengers: ");
     }
 
-    public void yesOrNo(){
+    public void showYorNotInteraction(){
         System.out.print("Y/N: ");
     }
 

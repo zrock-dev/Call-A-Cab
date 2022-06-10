@@ -34,7 +34,6 @@ public class DataBase {
 
     private void connectUtils(){
         Utils.dataBaseConnection = dataBaseConnection;
-        ModelClassConnections.initClasses();
     }
 
     public int getDriversAmount(){
