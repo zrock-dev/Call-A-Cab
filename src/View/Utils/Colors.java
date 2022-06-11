@@ -1,7 +1,13 @@
 package View.Utils;
 
+/**
+ * This is the color's class.
+ * This class contains all letters color and references the color's code.
+ */
 public class Colors {
-
+    /**
+     * This method contains the colors and its code.
+     */
     public static final String RED = "\u001B[31m",
             GREEN = "\u001B[32m",
             BLUE = "\u001B[34m",

@@ -1,13 +1,15 @@
 package Model;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Random;
 
+/**
+ *
+ */
 public class Utils {
     protected static Connection dataBaseConnection;
+    protected static int travelDetailsIdentifier;
 
-    protected static int obtainIdentification(String identificationType){
+    protected static int obtainRandomAppointment(String identificationType){
         int identifier = 0;
         String query = "SELECT id FROM "+ identificationType +" ORDER BY rand() LIMIT 1";
 

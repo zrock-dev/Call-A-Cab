@@ -1,66 +1,109 @@
 package Controller;
-import Model.*;
+
+import View.InformationTrip;
+import View.MenuPayment;
 import View.OptionInformation;
 
-public class TripsManager {
-    // Model
-    private int tripsLimit;
-    private final DataBase dataBase;
-    private final TaxiTrip taxiTrip;
-    private final TravelDetails travelDetails;
-    private final Car car;
-    private final TaxiDriver driver;
+import static Controller.ModelClassConnections.*;
 
+class TripsLimitReachedException extends Exception{
+}
+
+public class TripsManager {
+    private boolean stageReadyToContinue;
+
+    int tripsLimit;
     // View
-    OptionInformation message;
+    private final OptionInformation optionInformation;
+    private final MenuPayment menuPayment;
+    private final InformationTrip informationTrip;
+    private final InputUser inputUser;
 
     public TripsManager() {
-        dataBase = new DataBase();
-        taxiTrip = new TaxiTrip();
-        travelDetails = new TravelDetails();
-        driver = new TaxiDriver();
-        car = new Car();
-        message = new OptionInformation();
-
+        optionInformation = new OptionInformation();
+        menuPayment = new MenuPayment();
+        stageReadyToContinue = false;
+        informationTrip = new InformationTrip();
+        inputUser = new InputUser();
         calculateTripsLimit();
     }
 
-    public TaxiTrip getTaxiTrip() {
-        return taxiTrip;
+    public void run(){
+        scheduleTrip();
+        printTripTicket();
+        selectPaymentMethod();
+
+        informationTrip.showCabArrivalNotification(
+                driver.getFirstName(), driver.getLastName(), car.getCarType(),
+                car.getLicencePlate(), car.getColor()
+        );
+
+        askForAnotherCabInteraction();
     }
 
-    public TravelDetails getTravelDetails() {
-        return travelDetails;
-    }
-
-    protected void setTotalPrice(int totalPrice){
-        taxiTrip.setTotalPrice(totalPrice);
-    }
-
-    private void calculateTripsLimit(){
-        tripsLimit = dataBase.getDriversAmount();
-    }
-
-    public void requestTrip(){
-        if (tripsLimit > 0){
-            bookTrip();
-            tripsLimit--;
-
+    private void noMoreTripsAvailable(){
+        optionInformation.cabUnavailable();
+        optionInformation.tryAgain();
+        if (inputUser.getUserDecision().equalsIgnoreCase("Y")) {
+            tripsLimit++; // force one more trip
         } else {
-           message.cabUnavailable();
-           message.tryAgain();
+            stageReadyToContinue = true;
         }
     }
 
-    protected void bookTrip(){
+
+    private void askForAnotherCabInteraction() {
+        String userDecision = inputUser.getUserDecision();
+        if (userDecision.equalsIgnoreCase("N")) {
+            stageReadyToContinue = true;
+        } else {
+            try {
+                requestTrip();
+            } catch (TripsLimitReachedException exception) {
+                noMoreTripsAvailable();
+            }
+        }
+    }
+
+    private void requestTrip() throws TripsLimitReachedException {
+        if (!(tripsLimit > 0)){
+            throw new TripsLimitReachedException();
+        }
+    }
+
+    public boolean isStageReadyToMoveOn(){
+         return stageReadyToContinue;
+    }
+
+    private void calculateTripsLimit(){
+        try {
+            tripsLimit = dataBase.getDriversAmount();
+        }catch (NullPointerException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    private void scheduleTrip(){
+        tripsLimit--;
         int carIdentifier = taxiTrip.appointCar();
         int driverIdentifier = taxiTrip.appointDriver();
-        int travelDetailsId = travelDetails.uploadTravelDetails();
 
         car.populateCar(carIdentifier);
         driver.populateDriver(driverIdentifier);
-        taxiTrip.linkTravelDetails(travelDetailsId);
-
         taxiTrip.uploadTripTicket();
     }
+
+    private void printTripTicket() {
+        informationTrip.showInformationDriver(
+                driver.getFirstName(), driver.getLastName(), driver.getPhone(),
+                driver.getGender(), car.getCarIdentification());
+
+        informationTrip.showInformationCar(
+                car.getModel(), car.getLicencePlate(), car.getCarType(), car.getColor());
+    }
+
+    private void selectPaymentMethod(){
+        menuPayment.showMenu();
+    }
+
 }

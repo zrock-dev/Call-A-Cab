@@ -1,13 +1,11 @@
-import Controller.*;
-import View.Greeting;
-import View.InformationMethodPayment;
-import View.InformationUser;
-import View.OptionInformation;
-import javax.xml.crypto.Data;
 
+/**
+ * This class starts the program.
+ * This class instances Application and runs start from Application.
+ */
 public class Main {
     public static void main(String[] args) {
-        DataCollection dataCollection= new DataCollection();
-        dataCollection.start();
+        Application callACabSystem = new Application();
+        callACabSystem.start();
     }
 }
