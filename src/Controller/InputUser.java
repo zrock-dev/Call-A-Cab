@@ -1,8 +1,6 @@
 package Controller;
 
 import View.*;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Scanner;
 
 public class InputUser {
@@ -27,7 +25,7 @@ public class InputUser {
         return userDecision;
     }
 
-    private boolean isUserDecisionExpected(@NotNull String userDecision) {
+    private boolean isUserDecisionExpected(String userDecision) {
         boolean decisionValidation = false;
         if (userDecision.equalsIgnoreCase("Y") || userDecision.equalsIgnoreCase("N")){
             decisionValidation = true;

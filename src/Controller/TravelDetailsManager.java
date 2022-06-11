@@ -1,9 +1,7 @@
 package Controller;
 
 import View.*;
-
 import java.util.*;
-
 import static Controller.ModelClassConnections.*;
 
 public class TravelDetailsManager {
@@ -90,9 +88,9 @@ public class TravelDetailsManager {
     private void processUserChoice() {
         optionInformation.askForNewInformation();
         switch (inputUserChoice()) {
-            case 1 -> inputCustomerLocation();
-            case 2 -> inputArriveDestination();
-            case 3 -> inputNoPassengers();
+            case 1: inputCustomerLocation(); break;
+            case 2: inputArriveDestination(); break;
+            case 3: inputNoPassengers(); break;
         }
     }
 
