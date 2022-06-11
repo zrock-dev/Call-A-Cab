@@ -1,5 +1,5 @@
-create schema `Call-a-Cab`;
-
+DROP SCHEMA IF EXISTS `Call-a-Cab`;
+CREATE SCHEMA `Call-a-Cab`;
 -- tables
 -- Table: Driver
 USE `Call-a-Cab`;

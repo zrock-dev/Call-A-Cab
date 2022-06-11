@@ -50,11 +50,12 @@ public class Car {
     public int getCarIdentification() {
         return carIdentification;
     }
-// Falta llenar.
+    // Falta llenar.
     /**
      * This method
      * @param identifier
      */
+
     public void populateCar(int identifier) {
         try {
             String query = "SELECT model, color, type, licence_plate " +

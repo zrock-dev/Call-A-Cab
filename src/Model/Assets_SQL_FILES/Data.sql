@@ -1,3 +1,5 @@
+use `Call-a-Cab`;
+
 -- Driver data
 INSERT INTO Driver (first_name, last_name, phone, gender) value
     (
