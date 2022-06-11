@@ -3,30 +3,27 @@ package Controller;
 import View.*;
 
 import java.util.Scanner;
-
-
 public class DuringTravel {
 
     private static InformationTrip informationTrip;
     private InformationUser informationUser;
     private OptionInformation optionInformation;
-    private CheckInputUser checkInputUser;
+    private InputUser inputUser;
     private Scanner input;
 
     public DuringTravel(){
         informationTrip = new InformationTrip();
-        informationTrip = new InformationTrip();
+        informationUser = new InformationUser();
         optionInformation = new OptionInformation();
-        checkInputUser = new CheckInputUser();
+        inputUser = new InputUser();
         input = new Scanner(System.in);
     }
 
-
-    public static void showSimulationTravel(){
+    private static void simulationTravel(){
         int count = 1;
         while(count < 7){
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1100);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -36,34 +33,42 @@ public class DuringTravel {
         informationTrip.showYouAreInYourDestination();
     }
 
-    public int choiceTipsOrCritiques(){
+    private int choiceTipsOrCritiques(){
         optionInformation.tipsAndCritiques();
-        int optionSelected = input.nextInt();
-        return checkInputUser.validateChoiceInRange(optionSelected, 1, 3);
+        int optionSelected = inputUser.userInputInteger(input.next());
+        return inputUser.validateChoiceInRange(optionSelected, 1, 3);
     }
 
-    public void receiveTip(){
-        int tip = 0;
-        informationUser.aboutTheTrip();
-        tip = input.nextInt();
+    private void chooseOptionAfterTrip(){
+        int option = 0;
+        do{
+            option=choiceTipsOrCritiques();
+            switch (option){
+                case 1:
+                    receiveTip();
+                    break;
+                case 2:
+                    receiveCritique();
+                    break;
+            }
+        }while(option!=3);
     }
 
-    public void receiveCritique(){
-        String critique;
-        informationTrip.showMessageCritiques();
-        critique = input.nextLine();
+    private void receiveTip(){
+        informationUser.showReceiveTip();
+        int tip = inputUser.userInputInteger(input.next());
+        informationUser.showTip(tip);
     }
 
-    public static void main(String[] args) {
-        DuringTravel duringTravel= new DuringTravel();
-        duringTravel.showSimulationTravel();
-        duringTravel.choiceTipsOrCritiques();
+    private void receiveCritique(){
+        String critique = "";
+        informationUser.showReceiveCritique();
+        critique = input.next();
+        informationUser.showCritique(critique);
+    }
+
+    public void terminateTravel(){
+        simulationTravel();
+        chooseOptionAfterTrip();
     }
 }
-
-
-
-
-
-
-

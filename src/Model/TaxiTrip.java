@@ -3,7 +3,6 @@ package Model;
 import java.sql.*;
 
 import static Model.Utils.*;
-import static Model.Utils.travelDetailsIdentifier;
 
 /**
  * This class assigns a Taxi to  a trip.
@@ -12,7 +11,7 @@ import static Model.Utils.travelDetailsIdentifier;
  */
 public class TaxiTrip {
 
-    private int carIdentifier, driverIdentifier, totalPrice;
+    private int carIdentifier, driverIdentifier;
 
     /**
      * This method assigns a trip to a random car.
@@ -31,13 +30,6 @@ public class TaxiTrip {
         return driverIdentifier;
     }
 
-    /**
-     * This class sets total price.
-     * @param totalPrice
-     */
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 //Pendent
     /**
      *
@@ -46,12 +38,12 @@ public class TaxiTrip {
         try {
             String query =
                     "INSERT INTO Trips " +
-                    "(car_id, driver_id, travel_information_id, total_price) " +
+                    "(car_id, driver_id, travel_information_id) " +
                     "VALUES ("+
                             carIdentifier + "," +
                             driverIdentifier + "," +
-                            travelDetailsIdentifier + "," +
-                            totalPrice + ");";
+                            travelDetailsIdentifier +
+                            ");";
             PreparedStatement preparedStatement = dataBaseConnection.prepareStatement(query);
             preparedStatement.executeUpdate();
 

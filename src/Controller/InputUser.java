@@ -1,32 +1,31 @@
 package Controller;
 
-import View.InformationUser;
-import View.OptionInformation;
+import View.*;
 import java.util.Scanner;
 
-public class CheckInputUser {
+public class InputUser {
 
     private Scanner input;
-    private OptionInformation message;
+    private OptionInformation optionInformation;
     private InformationUser informationUser;
 
-    protected CheckInputUser(){
+    public InputUser(){
         input = new Scanner(System.in);
-        message = new OptionInformation();
+        optionInformation = new OptionInformation();
         informationUser = new InformationUser();
     }
 
     protected String askUserDecision(){
         String userDecision;
         do {
-            informationUser.showYorNotInteraction();
+            informationUser.askUserDecision();
             userDecision = input.next();
-        }while(!validateInput(userDecision));
+        }while(!isUserDecisionExpected(userDecision));
 
         return userDecision;
     }
 
-    private boolean validateInput(String userDecision) {
+    private boolean isUserDecisionExpected(String userDecision) {
         boolean decisionValidation = false;
         if (userDecision.equalsIgnoreCase("Y") || userDecision.equalsIgnoreCase("N")){
             decisionValidation = true;
@@ -34,7 +33,7 @@ public class CheckInputUser {
         return decisionValidation;
     }
 
-    protected boolean verifyInteger(String number) {
+    private boolean isUserSelectionInteger(String number) {
         try{
             Integer.parseInt(number);
             return true;
@@ -43,17 +42,25 @@ public class CheckInputUser {
         }
     }
 
-    private boolean verifyNumberInsideRange(int number, int minRange, int maxRange) {
+    private boolean isNumberInsideOfRange(int number, int minRange, int maxRange) {
         return number <= maxRange && number >= minRange;
     }
 
     protected int validateChoiceInRange(int numberToVerify, int minRange, int maxRange){
-        boolean checkNumber = verifyNumberInsideRange(numberToVerify, minRange,maxRange);
+        boolean checkNumber = isNumberInsideOfRange(numberToVerify, minRange,maxRange);
         while(!checkNumber){
-            message.numberOutOfRange();
+            optionInformation.numberOutOfRange();
             numberToVerify = input.nextInt();
-            checkNumber = verifyNumberInsideRange(numberToVerify, minRange, maxRange);
+            checkNumber = isNumberInsideOfRange(numberToVerify, minRange, maxRange);
         }
         return numberToVerify;
+    }
+
+    protected int userInputInteger(String number){
+        while(!isUserSelectionInteger(number)){
+            optionInformation.numberOutOfRange();
+            number = input.next();
+        }
+        return Integer.parseInt(number);
     }
 }

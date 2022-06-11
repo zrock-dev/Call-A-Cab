@@ -2,33 +2,29 @@ package Controller;
 
 import View.*;
 
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static Controller.ModelClassConnections.*;
 
 public class TravelDetailsManager {
     private Scanner input;
-    private CheckInputUser checkInputUser;
+    private InputUser inputUser;
 
     // View
     private InformationUser informationUser;
     private OptionInformation optionInformation;
-    private InformationTrip informationTrip;
-    private Greeting greeting;
 
     public TravelDetailsManager() {
         ModelClassConnections.initClasses();
 
-        greeting = new Greeting();
-        checkInputUser = new CheckInputUser();
+        inputUser = new InputUser();
         informationUser = new InformationUser();
         input = new Scanner(System.in);
         optionInformation = new OptionInformation();
-        informationTrip = new InformationTrip();
     }
 
     private void inputTravelDetails(){
+        informationUser.messageToEnterUserData();
         inputCustomerLocation();
         inputArriveDestination();
         inputNoPassengers();
@@ -46,39 +42,53 @@ public class TravelDetailsManager {
 
     private void inputNoPassengers() {
         informationUser.enterNumberPassengers();
-        travelDetails.setNoPassengers(input.nextInt());
+        try {
+            int amountPassengers = inputUser.userInputInteger(input.next());
+            travelDetails.setNoPassengers(amountPassengers);
+
+        }catch (InputMismatchException exception){
+            System.out.println("no correct number");
+        }
     }
 
-    public double generateDistance() {
+    private double generateDistance() {
         Random random = new Random();
         return random.nextInt(51)+1;
     }
 
-    public double totalBuy() {
-        return generateDistance() * travelDetails.getNoPassengers();
+    private double totalPrice() {
+        double price = generateDistance() * travelDetails.getNoPassengers();
+        if(price < 10) {
+            price*=3;
+        }
+        else if(price > 100){
+            price/=2;
+        }
+        return price;
     }
 
     private String askUserConfirmation(){
         showUserTravelDetails();
-        return checkInputUser.askUserDecision();
+        return inputUser.askUserDecision();
     }
 
     private void showUserTravelDetails() {
+        travelDetails.setTotalPrice(totalPrice());
         informationUser.showTripDetails(
                 travelDetails.getCustomerLocation(),
                 travelDetails.getArriveDestination(),
                 travelDetails.getNoPassengers(),
-                totalBuy());
+                travelDetails.getTotalPrice());
     }
 
     private int inputUserChoice(){
         optionInformation.informationToChange();
-        int userChoice = input.nextInt();
-        return checkInputUser.validateChoiceInRange(userChoice,1,3);
+        int userChoice = inputUser.userInputInteger(input.next());
+        return inputUser.validateChoiceInRange(userChoice,1,3);
     }
 
     private void processUserChoice() {
-        optionInformation.newInformation();
+        optionInformation.askForNewInformation();
         switch (inputUserChoice()) {
             case 1 -> inputCustomerLocation();
             case 2 -> inputArriveDestination();
@@ -87,30 +97,11 @@ public class TravelDetailsManager {
     }
 
     public void run(){
-        greeting.welcome();
         inputTravelDetails();
         while (askUserConfirmation().equalsIgnoreCase("N")){
             processUserChoice();
         }
         travelDetails.uploadTravelDetails();
     }
-
-    //Review
-
-    private String askIfWantsAnotherCab(){
-//        informationTrip.earlyArrivalNotification(driver.getFirstName(), car);
-        return checkInputUser.askUserDecision();
-    }
-
-    protected void validateAskAnotherCab(){
-        if(askIfWantsAnotherCab().equalsIgnoreCase("Y")){
-            //start
-        }
-        else{
-            DuringTravel.showSimulationTravel();
-
-        }
-    }
-
 
 }

@@ -1,83 +1,92 @@
 package View;
 
 import View.Utils.*;
-
+import static View.Utils.Decoration.decorationForMessage;
+/**
+ *This class shows the change menu.
+ *This class shows the change menu, reinsert information, enough cars message, and extras.
+ */
 public class OptionInformation {
 
-    Decoration decoration = new Decoration();
-
-    public void informationCorrect() {
-        System.out.print(Colors.YELLOW_BOLD + decoration.decorationForMessage("▓") +
-                decoration.decorationForMessage("=") +
-                decoration.decorationForMessage(" ", 40) +
-                "Is that information correct? Y/N\n" +
-                decoration.decorationForMessage("=") +
-                decoration.decorationForMessage("▓") +
-                ">> ");
-    }
-
+    /**
+     * This method show the menu of changes.
+     * Location, Arrive place and N° passengers.
+     */
     public void informationToChange() {
         System.out.print(Colors.RESET + "\n╔" +
-                decoration.decorationForMessage("═", 122) + "╗" +
-                "\n" + "║ " + decoration.decorationForMessage(">", 38) +
+                decorationForMessage("═", 122) + "╗" +
+                "\n" + "║ " + decorationForMessage(">", 38) +
                 " Which information would you like to change? " +
-                decoration.decorationForMessage("<", 37) + " ║\n" +
-                "╚" + decoration.decorationForMessage("═", 122) + "╝" +
-                "\n>> 1. Location\n" +
+                decorationForMessage("<", 37) + " ║\n" +
+                "╚" + decorationForMessage("═", 122) + "╝\n" +
+                ">> 1. Location\n" +
                 ">> 2. Arrive Place\n" +
                 ">> 3. Number of Passengers\n>>");
     }
 
-    public void newInformation() {
-        System.out.print(Colors.RESET + "\n" + decoration.decorationForMessage("♦•", 62) +
-                "\n│" + decoration.decorationForMessage(" ", 42) +
+    /**
+     * This method shows to reinsert information message.
+     */
+    public void askForNewInformation() {
+        System.out.print(Colors.RESET + "\n" +
+                decorationForMessage("♦•", 62) +
+                "\n│" + decorationForMessage(" ", 42) +
                 " Please, reinsert your new information " +
-                decoration.decorationForMessage(" ", 41) + "│\n" +
-                decoration.decorationForMessage("♦•", 62) + "\n>>");
+                decorationForMessage(" ", 41) + "│\n" +
+                decorationForMessage("♦•", 62));
 
     }
 
+    /**
+     * This method shows a message when there are not enough cars.
+     */
     public void cabUnavailable() {
-        System.out.println(Colors.RED + "\n" + decoration.decorationForMessage("≡") +
-                decoration.decorationForMessage(":○", 27) +
-                " We're sorry :( " + decoration.decorationForMessage(":○", 27) + "\n" +
-                decoration.decorationForMessage(":○", 21) +
+        System.out.println(Colors.RED + "\n" +
+                decorationForMessage("≡") +
+                decorationForMessage(":○", 27) +
+                " We're sorry :( " + decorationForMessage(":○", 27) + "\n" +
+                decorationForMessage(":○", 21) +
                 " Right now, we don't have an available cab" +
-                decoration.decorationForMessage(":○", 20) + "\n" +
-                decoration.decorationForMessage("≡", 124));
+                decorationForMessage(":○", 20) + "\n" +
+                decorationForMessage("≡", 124));
     }
 
-    public void tryAgain() {
-        System.out.print(Colors.YELLOW_BOLD + "\n" + decoration.decorationForMessage("≡")
-                + decoration.decorationForMessage(":○", 23) +
-                " Would you like to try again: Y/N " +
-                decoration.decorationForMessage(":○", 22) + "\n" +
-                decoration.decorationForMessage("≡") +
-                ">>");
+    /**
+     * This method shows a message asking customer to search a new car.
+     */
+    public void tryAgain(){
+        System.out.print(Colors.YELLOW_BOLD+ "\n" +
+                decorationForMessage("≡")+
+                decorationForMessage(":○",24)+
+                " Would you like to try again: "+
+                decorationForMessage(":○",23)+"\n"+
+                decorationForMessage("≡"));
     }
 
-    public void showCorrectOption() {
-        System.out.print("\n" + Colors.RED + decoration.decorationForMessage("=•", 61) +
-                "\n>> Please enter a Y or N <<\n" +
-                decoration.decorationForMessage("=•", 61));
-    }
-
+    /**
+     *This method shows a message when the customer write a different letter.
+     */
     public void numberOutOfRange() {
-        System.out.print("\n" + Colors.RED + decoration.decorationForMessage("=•", 61) +
+        System.out.print("\n" + Colors.RED +
+                decorationForMessage("=•", 61) +
                 "\n>> Please enter correct option <<\n" +
-                decoration.decorationForMessage("=•", 61));
+                decorationForMessage("=•", 61)+"\n>> ");
     }
 
+    /**
+     * This method shows a menu to choose an option in it.
+     */
     public void tipsAndCritiques() {
-        System.out.print(Colors.BLUE + "\n" + decoration.decorationForMessage("▓") +
-                decoration.decorationForMessage("=") +
-                decoration.decorationForMessage("•~•", 18) + " Tips & Critiques " +
-                decoration.decorationForMessage("•~•", 17) + "\n" +
-                decoration.decorationForMessage("=") +
-                decoration.decorationForMessage("▓") +
+        System.out.print(Colors.BLUE + "\n" +
+                decorationForMessage("▓") +
+                decorationForMessage("=") +
+                decorationForMessage("•~•", 18) + " Tips & Critiques " +
+                decorationForMessage("•~•", 17) + "\n" +
+                decorationForMessage("=") +
+                decorationForMessage("▓") +
                 "1. Give the driver a tip.\n" +
                 "2. Write your opinion about the travel.\n" +
-                "3. Leave.\n" +
-                decoration.decorationForMessage("=") + ">>");
+                "3. Exit.\n" +
+                decorationForMessage("=") + ">> ");
     }
 }

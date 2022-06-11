@@ -9,13 +9,3 @@ BEGIN
 END;
 // DELIMITER ;
 
-DELIMITER //
-# Procedure to get a random identifier
-CREATE PROCEDURE provideIdentifier(IN table_name varchar(50), OUT identifier integer)
-BEGIN
-    SET @TableName = table_name;
-    SELECT id FROM @TableName  ORDER BY rand() LIMIT 1 INTO identifier;
-END;
-// DELIMITER ;
-
-CALL provideIdentifier('Driver', 2);

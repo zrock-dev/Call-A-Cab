@@ -12,7 +12,7 @@ class TripsManagerTest {
         travelDetails.setCustomerLocation("street");
         travelDetails.setArriveDestination("MainStreet");
         travelDetails.setNoPassengers(100);
-        taxiTrip.setTotalPrice(10);
+        travelDetails.setTotalPrice(10);
     }
 
     @Test

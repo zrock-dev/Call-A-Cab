@@ -1,32 +1,42 @@
 package View;
 
-import View.Utils.Colors;
-import View.Utils.Decoration;
+import View.Utils.*;
 
+import static View.Utils.Decoration.decorationForMessage;
+
+/**
+ * This class shows the start and trip's information.
+ * This class shows the welcome with its borders and show the trip's information with its borders too.
+ */
 public class Greeting {
 
-    Decoration decoration=new Decoration();
-    InformationUser informationUser = new InformationUser();
-    public void welcome(){
-        System.out.println(Colors.CYAN+
-                decoration.decorationForMessage("▓")+
-                        decoration.decorationForMessage("♦")+
-                        decoration.decorationForMessage("❉",45)+
-                        " Welcome to our Call-A-Cab System " +
-                        decoration.decorationForMessage("❉",45)+"\n"
-                        +decoration.decorationForMessage("♦")+
-                        decoration.decorationForMessage("▓",124));
-        informationUser.messageToEnterUserData();
+    /**
+     *This method shows the welcome message with its border.
+     */
+    public void showWelcome(){
+        System.out.println(Colors.CYAN+ "\n" +
+                decorationForMessage("▓")+
+                decorationForMessage("♦")+
+                decorationForMessage("❉",45)+
+                " Welcome to our Call-A-Cab System " +
+                decorationForMessage("❉",45)+"\n"
+                + decorationForMessage("♦")+
+                decorationForMessage("▓")
+        );
     }
 
-    public void farewell(){
-        System.out.println(Colors.CYAN+ "\n"+
-                decoration.decorationForMessage("▓")+
-                decoration.decorationForMessage("♦")+
-                decoration.decorationForMessage("❉",34)+
-                " Thank you for choosing us, we hope you have a nice day " +
-                decoration.decorationForMessage("❉",34)+"\n"
-                +decoration.decorationForMessage("♦")+
-                decoration.decorationForMessage("▓"));
+    /**
+     * This method shows the ending of the program.
+     */
+    public void showFarewell(){
+        System.out.println("\n" + Colors.CYAN +
+                decorationForMessage("▓")+
+                decorationForMessage("♦")+
+                decorationForMessage("❉",40)+
+                " Thanks for using the Call-a-Cab System ^_^ " +
+                decorationForMessage("❉",40)+ "\n" +
+                decorationForMessage("♦")+
+                decorationForMessage("▓", 124)
+        );
     }
 }

@@ -7,7 +7,7 @@ public class ValidateInformation {
 
     private OptionInformation message;
     private Scanner input;
-    private CheckInputUser checkInputUser;
+    private InputUser inputUser;
     private TravelDetailsManager travelDetailsManager;
 
 
@@ -15,7 +15,7 @@ public class ValidateInformation {
     public ValidateInformation(){
         message = new OptionInformation();
         input = new Scanner(System.in);
-        checkInputUser = new CheckInputUser();
+        inputUser = new InputUser();
         travelDetailsManager = new TravelDetailsManager();
     }
     // public String receiveYOrN(){

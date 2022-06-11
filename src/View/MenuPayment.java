@@ -1,35 +1,34 @@
 package View;
 
-import View.Utils.Colors;
-import View.Utils.Decoration;
+import View.Utils.*;
 
 import java.util.Scanner;
-
+import static View.Utils.Decoration.decorationForMessage;
+/**
+ *This class shows the menu of payment method.
+ */
 public class MenuPayment {
 
-    Decoration decoration=new Decoration();
-    Scanner input = new Scanner(System.in);
 
+    /**
+     * This method shows the menu of payment method, and its options.
+     */
     public void showMenu(){
-        System.out.print(Colors.PURPLE + "\n"+ decoration.decorationForMessage("░")+
-                decoration.decorationForMessage("»",50) +
-                "| Choose payment method |"+decoration.decorationForMessage("«",49) +"\n"+
-                decoration.decorationForMessage("░")+
-                decoration.decorationForMessage(" ",30)+
-                "|option 1:|"+decoration.decorationForMessage(" ",43)+"|option 2:|\n" +
-                decoration.decorationForMessage(" ",32)+
-                "|Cash|"+decoration.decorationForMessage(" ",48)+"|Card|"+"\n" +
-                decoration.decorationForMessage("░")+
-                decoration.decorationForMessage("=",124)+
-                "\n>>");
-        int payOption = input.nextInt();
+        System.out.print(Colors.PURPLE + "\n"+
+                decorationForMessage("░")+
+                decorationForMessage("»",50) +
+                "| Choose payment method |" +
+                decorationForMessage("«",49) +"\n"+
+                decorationForMessage("░")+
+                decorationForMessage(" ",30)+
+                "|option 1:|"+decorationForMessage(" ",43)+"|option 2:|\n" +
+                decorationForMessage(" ",32)+
+                "|Cash|"+decorationForMessage(" ",48)+"|Card|"+"\n" +
+                decorationForMessage("░")+
+                decorationForMessage("=",124)+
+                "\n>> "
+        );
+        new Scanner(System.in).next();
     }
 
-    public void selectedTipInteraction(){
-        System.out.println(Colors.YELLOW_BOLD+ "\n"+decoration.decorationForMessage("=")+
-                decoration.decorationForMessage(" ",48)+
-                "How much do you want to tip?" +"\n"+
-                decoration.decorationForMessage("=")+
-                ">> ");
-    }
 }

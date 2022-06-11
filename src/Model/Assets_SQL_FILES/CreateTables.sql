@@ -28,18 +28,15 @@ ALTER TABLE Car AUTO_INCREMENT = 20;
 
 
 -- Table: Travel_information
-CREATE TABLE Travel_information (
+CREATE TABLE Travel_details (
     id integer NOT NULL AUTO_INCREMENT,
     customer_location varchar(255) NOT NULL,
     arrive_destination varchar(255) NOT NULL,
     no_passengers integer NOT NULL,
+    total_price double,
     PRIMARY KEY (ID)
 );
-ALTER TABLE Travel_information AUTO_INCREMENT = 30;
-
-SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE Trips;
-SET FOREIGN_KEY_CHECKS = 1;
+ALTER TABLE Travel_details AUTO_INCREMENT = 30;
 
 -- Table: Trips
 CREATE TABLE Trips (
@@ -47,13 +44,11 @@ CREATE TABLE Trips (
     car_id integer not null,
     driver_id integer not null,
     travel_information_id integer not null,
-    total_price integer not null,
     PRIMARY KEY (id),
     FOREIGN KEY (car_id) REFERENCES Car(id),
     FOREIGN KEY (driver_id) REFERENCES Driver(id),
-    FOREIGN KEY (travel_information_id) REFERENCES Travel_information(id)
+    FOREIGN KEY (travel_information_id) REFERENCES Travel_details(id)
 );
 ALTER TABLE Trips AUTO_INCREMENT = 40;
 
-DESCRIBE Trips;
 -- End of file.

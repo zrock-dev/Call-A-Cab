@@ -1,55 +1,88 @@
 package View;
 
-import Model.*;
 import View.Utils.*;
 
+import static View.Utils.Decoration.decorationForMessage;
+
+/**
+ * This class show the trip's status.
+ * Shows the driver's information and trip's status.
+ */
 public class InformationTrip {
 
-    Decoration decoration = new Decoration();
+    public void showCabArrivalNotification(String firstName, String lastName,
+                                           String carType, String licencePlate, String color) {
 
-    public void earlyArrivalNotification(TaxiDriver driver, Car car) {
-        System.out.println(Colors.RESET+ decoration.decorationForMessage("≡", 125)+"\n"+
-                decoration.decorationForMessage("〝•〞",30)+"\n"+
-                decoration.decorationForMessage(" ⁛ •",13)+
-                " Arriving Soon " + decoration.decorationForMessage(" ⁛ •",14)+"\n"+
-                decoration.decorationForMessage("〝•〞",30)+"\n"+
-                decoration.decorationForMessage("≡", 125)+"\n"+
-                driver.getFirstName()+ " "+ driver.getLastName()+
-                " is arriving soon in a "+car.getCarType() + "("+car.getLicencePlate()+")"+
-                " in a color " + car.getColor()+ ".\nWe hope you have a safe trip to your" +
+        System.out.print(Colors.RESET +
+                decorationForMessage("≡", 125)+"\n"+
+                decorationForMessage("〝•〞",30)+"\n"+
+                decorationForMessage(" ⁛ •",13)+
+                " Arriving Soon " +
+                decorationForMessage(" ⁛ •",14)+"\n"+
+                decorationForMessage("〝•〞",30)+"\n"+
+                decorationForMessage("≡", 125)+"\n"+
+                firstName+ " "+ lastName+
+                " is arriving soon in a "+carType + "("+licencePlate+")"+
+                " with color " + color+ ".\nWe hope you have a safe trip " +
                 " desired destination.\n"+
-                decoration.decorationForMessage("≡", 125));
+                decorationForMessage("≡", 125)+
+                "\nDo you need another cab?:\n>>");
     }
 
+    /**
+     * This method shows a simulation of the trip.
+     * @param numberOfPoint number of points next to "Traveling".
+     */
     public void showSimulationOfTravel(int numberOfPoint){
-        System.out.println("Traveling"+".".repeat(numberOfPoint));
-
+        System.out.println(Colors.BLUE + "\nTraveling"+ ".".repeat(numberOfPoint));
     }
 
-    public void showTripTicket(TaxiDriver driver, Car car){
-        System.out.println(Colors.BLUE +decoration.decorationForMessage("=")+
-                decoration.decorationForMessage("»°", 62)+"\n"+
-                decoration.decorationForMessage("=")+
-                " \tT\t\t▓"+" Conductor Information\n"
-                +" \tA\t\t▓ Name:         "+ driver.getFirstName() +" "+driver.getLastName()+
-                "\n \tX\t\t▓ Phone Number: "+driver.getPhone()+
-                "\n \tI\t\t▓ Gender:       "+driver.getGender()+
-                "\n   #"+ car.getCarIdentification() +"      ▓"+"\n"+
-                decoration.decorationForMessage("=")+
-                decoration.decorationForMessage("»°",62)+"\n"+
-                decoration.decorationForMessage("=")+
-                ">> Car model:" + car.getModel()+
-                "\n>> Plate:    " + car.getLicencePlate()+
-                "\n>> Type:     " + car.getCarType()+
-                "\n>> Color:    " + car.getColor()+"\n"+
-                decoration.decorationForMessage("≡", 124));
+    /**
+     * This method shows the driver's information.
+     * @param firstName driver's first name.
+     * @param lastName driver's last name.
+     * @param phone driver's phone.
+     * @param gender driver's gender.
+     * @param carIdentification driver's car identification.
+     */
+    public void showInformationDriver(String firstName, String lastName, int phone, String gender,
+                                      int carIdentification){
+        System.out.println(Colors.BLUE +
+                decorationForMessage("=")+
+                decorationForMessage("»°", 62)+"\n"+
+                decorationForMessage("=")+
+                " \tT\t\t▓"+" Conductor Information\n"+
+                " \tA\t\t▓ Name:         "+ firstName +" "+ lastName +
+                "\n \tX\t\t▓ Phone Number: "+ phone  +
+                "\n \tI\t\t▓ Gender:       "+ gender +
+                "\n   #"+ carIdentification +"      ▓"+"\n"+
+                decorationForMessage("=")+
+                decorationForMessage("»°",62)+"\n"+
+                decorationForMessage("=", 124)
+        );
     }
 
+    /**
+     * This method shows the car's information.
+     * @param model car's model.
+     * @param licencePlate car's license plate.
+     * @param carType car type.
+     * @param colorCar car's color.
+     */
+    public void showInformationCar(String model, String licencePlate,String carType, String colorCar ){
+        System.out.println(Colors.BLUE +
+                  ">> Car model:"  + model+
+                "\n>> Plate:    "+ licencePlate+
+                "\n>> Type:     "+ carType+
+                "\n>> Color:    "+ colorCar+ "\n"+
+                decorationForMessage("≡", 124));
+    }
+
+    /**
+     *This method shows the end of trip.
+     */
     public void showYouAreInYourDestination(){
         System.out.println("\nYou have arrived to your destine.");
     }
 
-    public void showMessageCritiques(){
-        System.out.println("Write your opinion about the travel.\n");
-    }
 }
