@@ -44,13 +44,17 @@ public class TripsManager {
     private void noMoreTripsAvailable(){
         optionInformation.cabUnavailable();
         optionInformation.tryAgain();
+
         if (inputUser.getUserDecision().equalsIgnoreCase("Y")) {
-            tripsLimit++; // force one more trip
+            forceOneMoreTrip();
         } else {
             stageReadyToContinue = true;
         }
     }
 
+    private void forceOneMoreTrip(){
+        tripsLimit++;
+    }
 
     private void askForAnotherCabInteraction() {
         String userDecision = inputUser.getUserDecision();

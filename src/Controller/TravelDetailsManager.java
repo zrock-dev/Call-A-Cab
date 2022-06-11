@@ -7,12 +7,12 @@ import java.util.*;
 import static Controller.ModelClassConnections.*;
 
 public class TravelDetailsManager {
-    private Scanner input;
-    private InputUser inputUser;
+    private final Scanner input;
+    private final InputUser inputUser;
 
     // View
-    private InformationUser informationUser;
-    private OptionInformation optionInformation;
+    private final InformationUser informationUser;
+    private final OptionInformation optionInformation;
 
     public TravelDetailsManager() {
         ModelClassConnections.initClasses();
@@ -47,7 +47,7 @@ public class TravelDetailsManager {
             travelDetails.setNoPassengers(amountPassengers);
 
         }catch (InputMismatchException exception){
-            System.out.println("no correct number");
+            exception.printStackTrace();
         }
     }
 
@@ -103,5 +103,4 @@ public class TravelDetailsManager {
         }
         travelDetails.uploadTravelDetails();
     }
-
 }

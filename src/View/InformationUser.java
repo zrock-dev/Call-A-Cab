@@ -8,8 +8,6 @@ import static View.Utils.Decoration.decorationForMessage;
  */
 public class InformationUser {
 
-    Decoration decoration=new Decoration();
-
     /**
      * This method shows customer's trip details.
      * @param location first customer location.
@@ -19,6 +17,7 @@ public class InformationUser {
      */
     public void showTripDetails(String location, String arriveDestination, int passengers, double cost){
         System.out.print(Colors.GREEN +
+                "\n" +
                 decorationForMessage("▓")+
                 decorationForMessage(" ", 49)+
                 "Are these details correct?" + "\n"+
@@ -35,7 +34,8 @@ public class InformationUser {
      * This method shows the menu to introduce the trip's information.
      */
     public void messageToEnterUserData(){
-        System.out.println(decorationForMessage(">•",62)+"\n"+
+        System.out.println( "\n" +
+                decorationForMessage(">•",62)+"\n"+
                 decorationForMessage(" ",35)+
                 " To call a cab, please enter the following information \n"+
                 decorationForMessage("<•",62));
