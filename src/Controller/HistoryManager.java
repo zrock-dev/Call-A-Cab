@@ -1,10 +1,9 @@
 package Controller;
-
-import View.Greeting;
 import View.InformationTrip;
 
 import java.sql.*;
-import static Controller.ModelClassConnections.dataBase;
+
+import static Controller.ModelClassConnections.taxiTrip;
 
 public class HistoryManager {
 
@@ -16,8 +15,8 @@ public class HistoryManager {
         String customerLocation;
         String arriveDestination;
         double totalCost;
-
-        try (ResultSet resultSet = dataBase.enableHistoryMode()) {
+        informationTrip.printHistoryHeader();
+        try (ResultSet resultSet = taxiTrip.enableHistoryMode()) {
             while (resultSet.next()){
                 carID = resultSet.getInt(1);
                 driverFirstName = resultSet.getString(2);

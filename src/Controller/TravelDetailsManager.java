@@ -69,7 +69,7 @@ public class TravelDetailsManager {
 
     private String askUserConfirmation(){
         showUserTravelDetails();
-        return inputUser.askUserDecision();
+        return inputUser.getUserDecision();
     }
 
     private void showUserTravelDetails() {

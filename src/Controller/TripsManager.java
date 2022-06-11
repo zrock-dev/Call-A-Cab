@@ -1,6 +1,9 @@
 package Controller;
 
-import View.*;
+import View.InformationTrip;
+import View.MenuPayment;
+import View.OptionInformation;
+
 import static Controller.ModelClassConnections.*;
 
 class TripsLimitReachedException extends Exception{
@@ -11,20 +14,19 @@ public class TripsManager {
 
     int tripsLimit;
     // View
-    private OptionInformation optionInformation;
-    private MenuPayment menuPayment;
-    private InformationTrip informationTrip;
-    private InputUser inputUser;
+    private final OptionInformation optionInformation;
+    private final MenuPayment menuPayment;
+    private final InformationTrip informationTrip;
+    private final InputUser inputUser;
 
-     public TripsManager() {
+    public TripsManager() {
         optionInformation = new OptionInformation();
-         menuPayment = new MenuPayment();
-         stageReadyToContinue = false;
-         informationTrip = new InformationTrip();
+        menuPayment = new MenuPayment();
+        stageReadyToContinue = false;
+        informationTrip = new InformationTrip();
         inputUser = new InputUser();
-         calculateTripsLimit();
-     }
-
+        calculateTripsLimit();
+    }
 
     public void run(){
         scheduleTrip();
@@ -37,29 +39,27 @@ public class TripsManager {
         );
 
         askForAnotherCabInteraction();
-
     }
 
     private void noMoreTripsAvailable(){
         optionInformation.cabUnavailable();
         optionInformation.tryAgain();
-        if(inputUser.askUserDecision().equalsIgnoreCase("Y")){
+        if (inputUser.getUserDecision().equalsIgnoreCase("Y")) {
             tripsLimit++; // force one more trip
-
-        }else{
+        } else {
             stageReadyToContinue = true;
         }
     }
 
 
-    private void askForAnotherCabInteraction(){
-         String userDecision = inputUser.askUserDecision();
-        if (userDecision.equalsIgnoreCase("N")){
+    private void askForAnotherCabInteraction() {
+        String userDecision = inputUser.getUserDecision();
+        if (userDecision.equalsIgnoreCase("N")) {
             stageReadyToContinue = true;
-        }else {
+        } else {
             try {
                 requestTrip();
-            }catch (TripsLimitReachedException exception){
+            } catch (TripsLimitReachedException exception) {
                 noMoreTripsAvailable();
             }
         }
@@ -83,7 +83,7 @@ public class TripsManager {
         }
     }
 
-    protected void scheduleTrip(){
+    private void scheduleTrip(){
         tripsLimit--;
         int carIdentifier = taxiTrip.appointCar();
         int driverIdentifier = taxiTrip.appointDriver();
@@ -93,10 +93,13 @@ public class TripsManager {
         taxiTrip.uploadTripTicket();
     }
 
-    private void printTripTicket(){
-        informationTrip.showInformationDriver(driver.getFirstName(), driver.getLastName(), driver.getPhone(),
+    private void printTripTicket() {
+        informationTrip.showInformationDriver(
+                driver.getFirstName(), driver.getLastName(), driver.getPhone(),
                 driver.getGender(), car.getCarIdentification());
-        informationTrip.showInformationCar(car.getModel(), car.getLicencePlate(), car.getCarType(), car.getColor());
+
+        informationTrip.showInformationCar(
+                car.getModel(), car.getLicencePlate(), car.getCarType(), car.getColor());
     }
 
     private void selectPaymentMethod(){

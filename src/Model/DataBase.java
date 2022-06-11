@@ -43,22 +43,4 @@ public class DataBase {
         }
         return driversAmount;
     }
-
-    public ResultSet enableHistoryMode(){
-        ResultSet resultSet = null;
-        String query =
-                "SELECT car.id, driver.first_name, driver.last_name,Ti.customer_location," +
-                      " Ti.arrive_destination, Ti.total_price " +
-                "FROM Trips " +
-                "INNER JOIN Car car on Trips.car_id = car.id " +
-                "INNER JOIN Driver driver on Trips.driver_id = driver.id " +
-                "INNER JOIN Travel_details Ti on Trips.travel_information_id = Ti.id;";
-        try {
-            resultSet = dataBaseConnection.createStatement().executeQuery(query);
-        } catch (SQLException exception){
-            exception.printStackTrace();
-        }
-
-        return resultSet;
-    }
 }

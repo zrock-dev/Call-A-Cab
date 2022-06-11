@@ -1,13 +1,15 @@
 package Controller;
 
 import View.*;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 
 public class InputUser {
 
-    private Scanner input;
-    private OptionInformation optionInformation;
-    private InformationUser informationUser;
+    private final Scanner input;
+    private final OptionInformation optionInformation;
+    private final InformationUser informationUser;
 
     public InputUser(){
         input = new Scanner(System.in);
@@ -15,7 +17,7 @@ public class InputUser {
         informationUser = new InformationUser();
     }
 
-    protected String askUserDecision(){
+    protected String getUserDecision(){
         String userDecision;
         do {
             informationUser.askUserDecision();
@@ -25,7 +27,7 @@ public class InputUser {
         return userDecision;
     }
 
-    private boolean isUserDecisionExpected(String userDecision) {
+    private boolean isUserDecisionExpected(@NotNull String userDecision) {
         boolean decisionValidation = false;
         if (userDecision.equalsIgnoreCase("Y") || userDecision.equalsIgnoreCase("N")){
             decisionValidation = true;
@@ -33,7 +35,7 @@ public class InputUser {
         return decisionValidation;
     }
 
-    private boolean isUserSelectionInteger(String number) {
+    private boolean isUserSelectionAnInteger(String number) {
         try{
             Integer.parseInt(number);
             return true;
@@ -57,7 +59,7 @@ public class InputUser {
     }
 
     protected int userInputInteger(String number){
-        while(!isUserSelectionInteger(number)){
+        while(!isUserSelectionAnInteger(number)){
             optionInformation.numberOutOfRange();
             number = input.next();
         }

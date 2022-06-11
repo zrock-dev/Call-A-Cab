@@ -5,11 +5,11 @@ import View.*;
 import java.util.Scanner;
 public class DuringTravel {
 
-    private static InformationTrip informationTrip;
-    private InformationUser informationUser;
-    private OptionInformation optionInformation;
-    private InputUser inputUser;
-    private Scanner input;
+    private final InformationTrip informationTrip;
+    private final InformationUser informationUser;
+    private final OptionInformation optionInformation;
+    private final InputUser inputUser;
+    private final Scanner input;
 
     public DuringTravel(){
         informationTrip = new InformationTrip();
@@ -19,7 +19,7 @@ public class DuringTravel {
         input = new Scanner(System.in);
     }
 
-    private static void simulationTravel(){
+    private void executeTravelSimulation(){
         int count = 1;
         while(count < 7){
             try {
@@ -30,7 +30,7 @@ public class DuringTravel {
             informationTrip.showSimulationOfTravel(count);
             count++;
         }
-        informationTrip.showYouAreInYourDestination();
+        informationTrip.showUserDestinationArrived();
     }
 
     private int choiceTipsOrCritiques(){
@@ -42,7 +42,7 @@ public class DuringTravel {
     private void chooseOptionAfterTrip(){
         int option = 0;
         do{
-            option=choiceTipsOrCritiques();
+            option = choiceTipsOrCritiques();
             switch (option){
                 case 1:
                     receiveTip();
@@ -51,7 +51,7 @@ public class DuringTravel {
                     receiveCritique();
                     break;
             }
-        }while(option!=3);
+        } while(option != 3);
     }
 
     private void receiveTip(){
@@ -61,14 +61,13 @@ public class DuringTravel {
     }
 
     private void receiveCritique(){
-        String critique = "";
         informationUser.showReceiveCritique();
-        critique = input.next();
+        String critique = input.next();
         informationUser.showCritique(critique);
     }
 
     public void terminateTravel(){
-        simulationTravel();
+        executeTravelSimulation();
         chooseOptionAfterTrip();
     }
 }

@@ -81,8 +81,27 @@ public class InformationTrip {
     /**
      *This method shows the end of trip.
      */
-    public void showYouAreInYourDestination(){
+    public void showUserDestinationArrived(){
         System.out.println("\nYou have arrived to your destine.");
     }
 
+    public void printHistoryHeader(){
+        System.out.println(Colors.CYAN +
+            decorationForMessage("▓")+
+            decorationForMessage(" ",46)+
+            "Take a look of what you scheduled\n"+
+            decorationForMessage("▓")
+        );
+    }
+
+    public void showScheduledTripsHistory(int carIdentification, String firstName, String lastName, String location,
+                                          String arriveDestination, double cost){
+        System.out.println(Colors.CYAN +
+                ">>Taxi#: \t\t|"+ carIdentification+"\n"+
+                ">>Driver: \t\t|"+ firstName + " " + lastName+"\n"+
+                ">>From - To: \t|"+ location + " - " + arriveDestination+"\n"+
+                ">>Price ($): \t|"+ cost + "\n" +
+                decorationForMessage("＊•",48));
+
+    }
 }

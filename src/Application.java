@@ -1,5 +1,4 @@
 import Controller.*;
-import View.Greeting;
 
 /**
  * This class instances the principal classes.
