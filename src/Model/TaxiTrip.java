@@ -57,7 +57,7 @@ public class TaxiTrip {
     public ResultSet enableHistoryMode(){
         ResultSet resultSet = null;
         String query =
-                "SELECT car.id, driver.first_name, driver.last_name,Ti.customer_location," +
+                "SELECT Trips.id, driver.first_name, driver.last_name,Ti.customer_location," +
                         " Ti.arrive_destination, Ti.total_price " +
                         "FROM Trips " +
                         "INNER JOIN Car car on Trips.car_id = car.id " +

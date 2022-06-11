@@ -9,16 +9,17 @@ public class HistoryManager {
 
     public void run(){
         InformationTrip informationTrip = new InformationTrip();
-        int carID;
+        int taxiIdentifier;
         String driverFirstName;
         String driverLastName;
         String customerLocation;
         String arriveDestination;
         double totalCost;
+
         informationTrip.printHistoryHeader();
         try (ResultSet resultSet = taxiTrip.enableHistoryMode()) {
             while (resultSet.next()){
-                carID = resultSet.getInt(1);
+                taxiIdentifier = resultSet.getInt(1);
                 driverFirstName = resultSet.getString(2);
                 driverLastName = resultSet.getString(3);
                 customerLocation = resultSet.getString(4);
@@ -26,7 +27,7 @@ public class HistoryManager {
                 totalCost = resultSet.getDouble(6);
 
                 informationTrip.showScheduledTripsHistory(
-                        carID, driverFirstName, driverLastName,
+                        taxiIdentifier, driverFirstName, driverLastName,
                         customerLocation, arriveDestination, totalCost
                 );
             }

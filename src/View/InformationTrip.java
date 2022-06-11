@@ -94,14 +94,13 @@ public class InformationTrip {
         );
     }
 
-    public void showScheduledTripsHistory(int carIdentification, String firstName, String lastName, String location,
+    public void showScheduledTripsHistory(int taxiIdentifier, String driverFirstName, String driverLastName, String location,
                                           String arriveDestination, double cost){
         System.out.println(Colors.CYAN +
-                ">>Taxi#: \t\t|"+ carIdentification+"\n"+
-                ">>Driver: \t\t|"+ firstName + " " + lastName+"\n"+
-                ">>From - To: \t|"+ location + " - " + arriveDestination+"\n"+
-                ">>Price ($): \t|"+ cost + "\n" +
-                decorationForMessage("＊•",48));
-
+                "Taxi # \t\t|"+ taxiIdentifier+"\n"+
+                "Driver: \t\t|"+ driverFirstName + " " + driverLastName + "\n"+
+                "From - To: \t|"+ location + " - " + arriveDestination + "\n"+
+                "Price ($): \t|"+ cost + "\n" +
+                decorationForMessage("＊•",48) + "\n");
     }
 }
