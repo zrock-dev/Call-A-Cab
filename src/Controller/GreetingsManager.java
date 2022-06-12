@@ -3,7 +3,7 @@ package Controller;
 import View.Greeting;
 
 public class GreetingsManager {
-    Greeting greeting;
+    private final Greeting greeting;
 
     public GreetingsManager() {
         greeting = new Greeting();

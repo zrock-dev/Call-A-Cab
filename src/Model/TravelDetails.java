@@ -9,10 +9,11 @@ import static Model.Utils.*;
  * Returns Customer Location, Arrive Destination and N° passengers.
  * Sets Customer locations, Arrive Destination and N° passengers.
  */
-public class TravelDetails {
+public class TravelDetails implements ObjectAppointable {
     private String customerLocation, arriveDestination;
     private int noPassengers;
     private double totalPrice;
+    private int identifier;
 
     /**
      * This method returns the customer location.
@@ -75,8 +76,7 @@ public class TravelDetails {
      *
      */
 
-    protected int obtainIdentifier(){
-        int identifier = 0;
+    protected void obtainIdentifier(){
         try{
             Statement statement = dataBaseConnection.createStatement();
             String IdentifierQuery =
@@ -87,7 +87,6 @@ public class TravelDetails {
         }catch (SQLException exception){
             exception.printStackTrace();
         }
-        return identifier;
     }
 
     public void uploadTravelDetails(){
@@ -103,10 +102,19 @@ public class TravelDetails {
             queryValues.setDouble(4, totalPrice);
             queryValues.executeUpdate();
 
-            travelDetailsIdentifier = obtainIdentifier();
-
         }catch (SQLException exception){
             exception.printStackTrace();
         }
+    }
+
+    @Override
+    public void makeAppointment(int tripTicket) {
+        obtainIdentifier();
+        updateTicket("travel_details_id", identifier, tripTicket);
+    }
+
+    @Override
+    public void populate() {
+        // do shit
     }
 }

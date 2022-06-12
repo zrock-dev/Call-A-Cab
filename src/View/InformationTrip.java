@@ -10,8 +10,8 @@ import static View.Utils.Decoration.decorationForMessage;
  */
 public class InformationTrip {
 
-    public void showCabArrivalNotification(String firstName, String lastName,
-                                           String carType, String licencePlate, String color) {
+    public void showCabArrivalNotification(String driverFirstName, String dtiverLastName,
+                                           String carModel, String licencePlate, String color) {
 
         System.out.print(Colors.RESET +
                 decorationForMessage("≡", 125)+"\n"+
@@ -21,11 +21,11 @@ public class InformationTrip {
                 decorationForMessage(" ⁛ •",14)+"\n"+
                 decorationForMessage("〝•〞",30)+"\n"+
                 decorationForMessage("≡", 125)+"\n"+
-                firstName+ " "+ lastName+
-                " is arriving soon in a "+carType + "("+licencePlate+")"+
-                " with color " + color+ ".\nWe hope you have a safe trip " +
+                driverFirstName+ " " + dtiverLastName +
+                " is arriving soon in a " + carModel + " (" + licencePlate + ")" +
+                " color " + color + ".\nWe hope you have a safe trip " +
                 " desired destination.\n"+
-                decorationForMessage("≡", 125)+
+                decorationForMessage("≡", 125) +
                 "\nDo you need another cab?:\n>>");
     }
 

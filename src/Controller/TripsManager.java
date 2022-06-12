@@ -1,8 +1,14 @@
 package Controller;
 
+import Model.Car;
+import Model.ObjectAppointable;
+import Model.TaxiDriver;
 import View.InformationTrip;
 import View.MenuPayment;
 import View.OptionInformation;
+
+import java.sql.Driver;
+import java.util.ArrayList;
 
 import static Controller.ModelClassConnections.*;
 
@@ -11,13 +17,16 @@ class TripsLimitReachedException extends Exception{
 
 public class TripsManager {
     private boolean stageReadyToContinue;
-
-    int tripsLimit;
+    private int tripsLimit;
     // View
     private final OptionInformation optionInformation;
     private final MenuPayment menuPayment;
     private final InformationTrip informationTrip;
     private final InputUser inputUser;
+
+    //Model
+    TaxiDriver driver;
+    Car car;
 
     public TripsManager() {
         optionInformation = new OptionInformation();
@@ -25,6 +34,8 @@ public class TripsManager {
         stageReadyToContinue = false;
         informationTrip = new InformationTrip();
         inputUser = new InputUser();
+        driver = new TaxiDriver();
+        car = new Car();
         calculateTripsLimit();
     }
 
@@ -34,7 +45,7 @@ public class TripsManager {
         selectPaymentMethod();
 
         informationTrip.showCabArrivalNotification(
-                driver.getFirstName(), driver.getLastName(), car.getCarType(),
+                driver.getFirstName(), driver.getLastName(), car.getModel(),
                 car.getLicencePlate(), car.getColor()
         );
 
@@ -56,6 +67,16 @@ public class TripsManager {
         tripsLimit++;
     }
 
+    private void requestTrip() throws TripsLimitReachedException {
+        if (!(tripsLimit > 0)){
+            throw new TripsLimitReachedException();
+        }
+    }
+
+    public boolean isStageReadyToMoveOn(){
+        return stageReadyToContinue;
+    }
+
     private void askForAnotherCabInteraction() {
         String userDecision = inputUser.getUserDecision();
         if (userDecision.equalsIgnoreCase("N")) {
@@ -69,16 +90,6 @@ public class TripsManager {
         }
     }
 
-    private void requestTrip() throws TripsLimitReachedException {
-        if (!(tripsLimit > 0)){
-            throw new TripsLimitReachedException();
-        }
-    }
-
-    public boolean isStageReadyToMoveOn(){
-         return stageReadyToContinue;
-    }
-
     private void calculateTripsLimit(){
         try {
             tripsLimit = dataBase.getDriversAmount();
@@ -88,22 +99,23 @@ public class TripsManager {
     }
 
     private void scheduleTrip(){
+        ArrayList<ObjectAppointable> listItems = new ArrayList<>();
+        listItems.add(car);
+        listItems.add(driver);
+        listItems.add(travelDetails);
+        taxiTrip.appointTaxi(listItems);
         tripsLimit--;
-        int carIdentifier = taxiTrip.appointCar();
-        int driverIdentifier = taxiTrip.appointDriver();
-
-        car.populateCar(carIdentifier);
-        driver.populateDriver(driverIdentifier);
-        taxiTrip.uploadTripTicket();
     }
 
     private void printTripTicket() {
         informationTrip.showInformationDriver(
                 driver.getFirstName(), driver.getLastName(), driver.getPhone(),
-                driver.getGender(), car.getCarIdentification());
+                driver.getGender(), car.getIdentifier()
+        );
 
         informationTrip.showInformationCar(
-                car.getModel(), car.getLicencePlate(), car.getCarType(), car.getColor());
+                car.getModel(), car.getLicencePlate(), car.getCarType(), car.getColor()
+        );
     }
 
     private void selectPaymentMethod(){

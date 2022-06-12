@@ -2,20 +2,24 @@ package Model;
 import java.sql.*;
 
 public class DataBase {
-
     private Connection dataBaseConnection;
+    private String password;
+    private String user;
 
     public DataBase(){
-        dataBaseConnection = null;
+        loginUser();
         establishConnection();
         connectUtils();
     }
 
-    private void establishConnection(){
-        // mysql login
-        String user = "root";
-        String password = "123";
+    private void loginUser(){
+// ----- mySQL user login -------------
+        user = "root";
+        password = "123";
+// -------------------------------------
+    }
 
+    private void establishConnection(){
         try {
             dataBaseConnection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/Call-a-Cab", user, password
@@ -24,7 +28,6 @@ public class DataBase {
         }catch (SQLException ex){
             ex.printStackTrace();
         }
-
     }
 
     private void connectUtils(){

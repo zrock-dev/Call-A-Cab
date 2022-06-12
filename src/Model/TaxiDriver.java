@@ -2,18 +2,19 @@ package Model;
 
 import java.sql.*;
 
-import static Model.Utils.dataBaseConnection;
+import static Model.Utils.*;
 
 /**
  * This is the Taxi driver class.
  * This class returns the first name, last name, phone number and gender of taxi driver.
  * And introduces information of the taxi driver.
  */
-public class TaxiDriver {
+public class TaxiDriver implements ObjectAppointable {
     private String firstName;
     private String lastName;
     private int phoneNumber;
     private String gender;
+    private int identifier;
 
     /**
      * This method return the driver's first name.
@@ -46,17 +47,14 @@ public class TaxiDriver {
     public String getGender() {
         return gender;
     }
-//Pendiente
-    /**
-     * do not
-     *
-     * @param DriverIdentification don't miss me
-     */
-    public void populateDriver(int DriverIdentification){
+
+
+    @Override
+    public void populate(){
         try{
             String query = "SELECT Driver.first_name, Driver.last_name, Driver.phone, Driver.gender " +
                     "FROM Driver " +
-                    "WHERE Driver.id = " + DriverIdentification + ";";
+                    "WHERE Driver.id = " + identifier + ";";
             ResultSet resultSet = dataBaseConnection.createStatement().executeQuery(query);
             resultSet.next();
 
@@ -67,5 +65,12 @@ public class TaxiDriver {
         }catch (SQLException exception){
             exception.printStackTrace();
         }
+    }
+
+    @Override
+    public void makeAppointment(int tripTicket) {
+        identifier = obtainRandomIdentifier("Driver");
+        updateTicket("driver_id", identifier, tripTicket);
+        populate();
     }
 }

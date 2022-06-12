@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import static Model.Utils.*;
 
@@ -10,48 +11,39 @@ import static Model.Utils.*;
  * Set the total Price and generates a ticket.
  */
 public class TaxiTrip {
+    private int tripsRecorded;
 
-    private int carIdentifier, driverIdentifier;
-    private int numberOfTripsRecorded;
-
-    /**
-     * This method assigns a trip to a random car.
-     * @return carIdentifier: all cars have different ones.
-     */
-    public int appointCar(){
-        carIdentifier = obtainRandomAppointment("Car");
-        return carIdentifier;
-    }
-    /**
-     * This method assign a trip to a random driver.
-     * @return driverIdentifier: all drivers have different ones.
-     */
-    public int appointDriver(){
-        driverIdentifier = obtainRandomAppointment("Driver");
-        return driverIdentifier;
+    public void appointTaxi(ArrayList<ObjectAppointable> taxiComponents){
+        int taxiTicket = generateTicket();
+        if (taxiTicket == 0){
+            System.out.println("\n\n Error not working \n\n");
+        }
+        for (ObjectAppointable item:
+             taxiComponents) {
+            item.makeAppointment(taxiTicket);
+        }
+//        taxiComponents.iterator()
+//                .next()
+//                .makeAppointment(taxiTicket);
     }
 
 //Pendent
     /**
      *
      */
-    public void uploadTripTicket(){
+    public int generateTicket(){
+        int ticket = 0;
         try {
-            String query =
-                    "INSERT INTO Trips " +
-                    "(car_id, driver_id, travel_information_id) " +
-                    "VALUES ("+
-                            carIdentifier + "," +
-                            driverIdentifier + "," +
-                            travelDetailsIdentifier +
-                            ");";
-            PreparedStatement preparedStatement = dataBaseConnection.prepareStatement(query);
-            preparedStatement.executeUpdate();
-            numberOfTripsRecorded++;
+            CallableStatement statement = dataBaseConnection.prepareCall("{CALL generateTicket (?)}");
+            statement.registerOutParameter(1, Types.INTEGER);
+            statement.execute();
+            ticket = statement.getInt(1);
+            tripsRecorded++;
 
         } catch (SQLException exception) {
            exception.printStackTrace();
         }
+        return ticket;
     }
 
     public ResultSet enableHistoryMode(){
@@ -62,14 +54,13 @@ public class TaxiTrip {
                         "FROM Trips " +
                         "INNER JOIN Car car on Trips.car_id = car.id " +
                         "INNER JOIN Driver driver on Trips.driver_id = driver.id " +
-                        "INNER JOIN Travel_details Ti on Trips.travel_information_id = Ti.id " +
-                        "ORDER BY Trips.id DESC LIMIT " + numberOfTripsRecorded + " ;";
+                        "INNER JOIN Travel_details Ti on Trips.travel_details_id = Ti.id " +
+                        "ORDER BY Trips.id DESC LIMIT " + tripsRecorded + " ;";
         try {
             resultSet = dataBaseConnection.createStatement().executeQuery(query);
         } catch (SQLException exception){
             exception.printStackTrace();
         }
-
         return resultSet;
     }
 }
