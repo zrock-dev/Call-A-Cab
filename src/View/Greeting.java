@@ -8,6 +8,8 @@ import static View.Utils.Decoration.decorationForMessage;
  * This is the greeting class.
  * This class contains methods that display the startup message on program start
  * and also display the completion message on program completion.
+ *
+ * @author AfricanRiot
  */
 public class Greeting {
 

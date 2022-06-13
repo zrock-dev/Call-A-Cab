@@ -5,6 +5,8 @@ package View.Utils;
  *
  * This class contains all the colors that will
  * be used for the messages that the code needs.
+ *
+ * @author AfricanRiot
  */
 public class Colors {
 

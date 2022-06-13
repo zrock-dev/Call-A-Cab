@@ -9,6 +9,8 @@ import static Model.Utils.*;
  *
  *  This class contains methods that help us get the taxi driver information.
  *  also gets the data from a Driver row in database.
+ *
+ *  @author AfricanRiot
  */
 public class TaxiDriver implements Linkable, Populable {
     private String firstName;

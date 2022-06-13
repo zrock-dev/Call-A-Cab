@@ -8,6 +8,7 @@ import static Controller.ModelClassConnections.*;
  * This class manages the information about the travel the user provides.
  *
  * @see InputUser
+ * @author AfricanRiot
  */
 
 public class TravelDetailsManager {

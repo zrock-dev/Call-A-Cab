@@ -7,6 +7,8 @@ import static Controller.ModelClassConnections.taxiTrip;
 
 /**
  * This class manages the history of the recorded trips.
+ *
+ * @author AfricanRiot
  */
 public class HistoryManager {
     /**

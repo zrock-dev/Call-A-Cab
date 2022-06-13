@@ -6,6 +6,7 @@ import View.Greeting;
  * This class shows the Welcome message and Farewell message from Greeting.
  *
  * @see View.Greeting for more information.
+ * @author AfricanRiot
  */
 public class GreetingsManager {
     private final Greeting greeting;

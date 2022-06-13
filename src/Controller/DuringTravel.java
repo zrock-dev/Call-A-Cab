@@ -8,6 +8,7 @@ import java.util.Scanner;
  * Executes the travel animation, controls the user's choice
  * about the tip, critics or exit and receives that.
  *
+ * @author AfricanRiot
  */
 public class DuringTravel {
 

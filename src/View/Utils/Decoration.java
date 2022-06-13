@@ -5,6 +5,8 @@ package View.Utils;
  *
  * It helps us put a decoration on the
  * messages that the other classes request.
+ *
+ * @author AfricanRiot
  */
 public class Decoration {
 

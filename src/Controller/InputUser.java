@@ -7,6 +7,8 @@ import java.util.Scanner;
  * This class controls the user's inputs.
  * This class converts the user's number to int, verifies if it's convertible to int,
  * controls if the user's number is on range, and gets user decision.
+ *
+ * @author AfricanRiot
  */
 public class InputUser {
 

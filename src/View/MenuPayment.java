@@ -7,6 +7,7 @@ import static View.Utils.Decoration.decorationForMessage;
  * This is the menu payment class.
  * This class has a method that shows us the available payment options.
  *
+ * @author AfricanRiot
  */
 public class MenuPayment {
 

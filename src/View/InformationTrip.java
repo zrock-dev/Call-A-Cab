@@ -10,6 +10,8 @@ import static View.Utils.Decoration.decorationForMessage;
  *
  * Shows the necessary messages with driver
  * information and trip status.
+ *
+ * @author AfricanRiot
  */
 public class InformationTrip {
 

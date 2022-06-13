@@ -4,6 +4,8 @@ import Model.*;
 
 /**
  * This class has re utilizable code and universal values.
+ *
+ * @author AfricanRiot
  */
 public class ModelClassConnections {
     protected static DataBase dataBase;

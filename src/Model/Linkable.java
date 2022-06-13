@@ -1,9 +1,10 @@
 package Model;
 
 /**
- * Meant to link the secondary tables to the main Trips table.
+ * Meant to link the secondary tables to the main Trips table
+ * by uploading the secondary table identifier.
  *
- * Made by uploading the secondary table identifier.
+ * @author AfricanRiot
  */
 public interface Linkable {
 
@@ -22,6 +23,7 @@ public interface Linkable {
 /**
  * To populate a class with the database information.
  *
+ * @author AfricanRiot
  */
 interface Populable{
 

@@ -1,9 +1,11 @@
 package Model;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
-
-import static Model.Utils.*;
+import static Model.Utils.dataBaseConnection;
 
 /**
  *  This class contains methods that help us get the Trip information.
@@ -11,7 +13,7 @@ import static Model.Utils.*;
  *  Contains attributes such as model, color, car type and license plate,
  *  also obtains the information from a specific Trip table row in the database.
  *
- * @author
+ * @author AfricanRiot
  */
 
 public class TaxiTrip {

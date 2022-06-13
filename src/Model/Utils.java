@@ -6,6 +6,8 @@ import java.sql.*;
  * This class contains re utilizable code.
  *
  * Also it provides the only connection we have to the database
+ *
+ * @author AfricanRiot
  */
 public class Utils {
     protected static Connection dataBaseConnection;

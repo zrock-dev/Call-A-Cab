@@ -7,6 +7,8 @@ import static View.Utils.Decoration.decorationForMessage;
  *
  *This class shows the change menu, reinsert information,
  * enough cars message, and extras.
+ *
+ * @author AfricanRiot
  */
 public class OptionInformation {
 

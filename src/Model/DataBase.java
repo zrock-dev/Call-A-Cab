@@ -4,6 +4,7 @@ import java.sql.*;
 /**
  * This class provides a connection to the DBMS mySQL server.
  *
+ * @author AfricanRiot
  */
 
 public class DataBase {

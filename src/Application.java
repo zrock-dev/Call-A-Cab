@@ -5,7 +5,7 @@ import Controller.*;
  * This class instances TravelDetailsManager, TripManager,
  * HistoryManager, and Greeting.
  *
- * @author
+ * @author AfricanRiot
  */
 public class Application {
 

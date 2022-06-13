@@ -9,6 +9,8 @@ import static Model.Utils.*;
  *
  * Contains attributes such as model, color, car type and
  * also obtains the information from the driver database.
+ *
+ * @author AfricanRiot
  */
 public class TravelDetails implements Linkable {
     private String customerLocation, arriveDestination;

@@ -5,6 +5,8 @@ import static View.Utils.Decoration.decorationForMessage;
 
 /**
  * This class shows the information that the user will put.
+ *
+ * @author AfricanRiot
  */
 public class InformationUser {
 

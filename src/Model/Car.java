@@ -9,7 +9,7 @@ import static Model.Utils.*;
  *  Contains attributes such as model, color, car type and license plate,
  *  also obtains the information from the Car table in the database.
  *
- * @author
+ * @author AfricanRiot
  */
 public class Car implements Linkable, Populable {
     private int identifier;

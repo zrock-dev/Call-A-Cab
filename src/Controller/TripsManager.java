@@ -7,13 +7,17 @@ import java.util.ArrayList;
 import static Controller.ModelClassConnections.*;
 
 /**
- * This exception is throwed whenever the limit of available trips is reached.
+ * This exception is thrown whenever the limit of available trips is reached.
+ *
+ * @author AfricanRiot
  */
 class TripsLimitReachedException extends Exception{
 }
 
 /**
  * This class manages the trip details
+ *
+ * @author AfricanRiot
  */
 public class TripsManager {
     private boolean stageReadyToContinue;
