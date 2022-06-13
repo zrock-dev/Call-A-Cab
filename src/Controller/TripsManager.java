@@ -1,15 +1,9 @@
 package Controller;
 
-import Model.Car;
-import Model.ObjectAppointable;
-import Model.TaxiDriver;
-import View.InformationTrip;
-import View.MenuPayment;
-import View.OptionInformation;
-
-import java.sql.Driver;
+import View.*;
+import Model.*;
+import java.util.Scanner;
 import java.util.ArrayList;
-
 import static Controller.ModelClassConnections.*;
 
 class TripsLimitReachedException extends Exception{
@@ -23,7 +17,7 @@ public class TripsManager {
     private final MenuPayment menuPayment;
     private final InformationTrip informationTrip;
     private final InputUser inputUser;
-
+    private final Scanner input;
     //Model
     TaxiDriver driver;
     Car car;
@@ -34,6 +28,7 @@ public class TripsManager {
         stageReadyToContinue = false;
         informationTrip = new InformationTrip();
         inputUser = new InputUser();
+        input = new Scanner(System.in);
         driver = new TaxiDriver();
         car = new Car();
         calculateTripsLimit();
@@ -120,6 +115,8 @@ public class TripsManager {
 
     private void selectPaymentMethod(){
         menuPayment.showMenu();
+        String paymentMethod = input.next();
+        inputUser.userInputInteger(paymentMethod, 1, 2);
     }
 
 }

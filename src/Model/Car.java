@@ -1,7 +1,6 @@
 package Model;
 
 import java.sql.*;
-
 import static Model.Utils.*;
 
 /**
@@ -44,6 +43,7 @@ public class Car implements ObjectAppointable {
     public String getCarType() {
         return carType;
     }
+
     /**
      * This method return the car's Identification.
      * @return carIdentification

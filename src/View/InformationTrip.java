@@ -10,7 +10,7 @@ import static View.Utils.Decoration.decorationForMessage;
  */
 public class InformationTrip {
 
-    public void showCabArrivalNotification(String driverFirstName, String dtiverLastName,
+    public void showCabArrivalNotification(String driverFirstName, String driverLastName,
                                            String carModel, String licencePlate, String color) {
 
         System.out.print(Colors.RESET +
@@ -21,11 +21,11 @@ public class InformationTrip {
                 decorationForMessage(" ⁛ •",14)+"\n"+
                 decorationForMessage("〝•〞",30)+"\n"+
                 decorationForMessage("≡", 125)+"\n"+
-                driverFirstName+ " " + dtiverLastName +
+                driverFirstName+ " " + driverLastName +
                 " is arriving soon in a " + carModel + " (" + licencePlate + ")" +
                 " color " + color + ".\nWe hope you have a safe trip " +
                 " desired destination.\n"+
-                decorationForMessage("≡", 125) +
+                decorationForMessage("≡", 125)+
                 "\nDo you need another cab?:\n>>");
     }
 
@@ -34,7 +34,7 @@ public class InformationTrip {
      * @param numberOfPoint number of points next to "Traveling".
      */
     public void showSimulationOfTravel(int numberOfPoint){
-        System.out.println(Colors.BLUE + "\nTraveling"+ ".".repeat(numberOfPoint));
+        System.out.println(Colors.BLUE + "Traveling"+ ".".repeat(numberOfPoint));
     }
 
     /**
@@ -98,7 +98,7 @@ public class InformationTrip {
                                           String arriveDestination, double cost){
         System.out.println(Colors.CYAN +
                 "Taxi # \t\t|"+ taxiIdentifier+"\n"+
-                "Driver: \t\t|"+ driverFirstName + " " + driverLastName + "\n"+
+                "Driver: \t|"+ driverFirstName + " " + driverLastName + "\n"+
                 "From - To: \t|"+ location + " - " + arriveDestination + "\n"+
                 "Price ($): \t|"+ cost + "\n" +
                 decorationForMessage("＊•",48) + "\n");

@@ -56,6 +56,14 @@ public class InputUser {
         return numberToVerify;
     }
 
+    protected int userInputInteger(String number, int minRange, int maxRange){
+        while(!isUserSelectionAnInteger(number)){
+            optionInformation.numberOutOfRange();
+            number = input.next();
+        }
+        return validateChoiceInRange(Integer.parseInt(number), minRange, maxRange);
+    }
+
     protected int userInputInteger(String number){
         while(!isUserSelectionAnInteger(number)){
             optionInformation.numberOutOfRange();

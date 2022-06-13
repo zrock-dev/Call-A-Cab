@@ -1,9 +1,8 @@
 package View;
 
 import View.Utils.*;
-
-import java.util.Scanner;
 import static View.Utils.Decoration.decorationForMessage;
+
 /**
  *This class shows the menu of payment method.
  */
@@ -28,7 +27,5 @@ public class MenuPayment {
                 decorationForMessage("=",124)+
                 "\n>> "
         );
-        new Scanner(System.in).next();
     }
-
 }
