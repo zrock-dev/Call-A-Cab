@@ -1,32 +1,54 @@
 import Controller.*;
 
 /**
- * This class instances the principal classes.
+ * This class starts the application.
  * This class instances TravelDetailsManager, TripManager,
- * Instances HistoryManager and Greeting.
+ * HistoryManager, and Greeting.
+ *
+ * @author
  */
 public class Application {
+
     /**
-     *This method initiates the program.
+     * This method starts the program.
+     * With this method we can start the application
+     * instantiating the necessary classes.
+     *
      */
     public void start(){
-        TravelDetailsManager travelDetailsManager = new TravelDetailsManager();
-        TripsManager tripsManager = new TripsManager();
-        HistoryManager historyManager = new HistoryManager();
-        DuringTravel duringTravel = new DuringTravel();
         GreetingsManager greetingsManager = new GreetingsManager();
 
         greetingsManager.showWelcomeMessage();
+        userTripReservationsStage();
+        afterReservationStage();
+        greetingsManager.showFareWellMessage();
+    }
+
+    /**
+     * This is where the core of the system, runs the trips reservation features.
+     *
+     * @see TravelDetailsManager
+     * @see TripsManager
+     */
+    private void userTripReservationsStage(){
+        TravelDetailsManager travelDetailsManager = new TravelDetailsManager();
+        TripsManager tripsManager = new TripsManager();
 
         do {
             travelDetailsManager.run();
             tripsManager.run();
         }while (!tripsManager.isStageReadyToMoveOn());
+    }
 
-        duringTravel.terminateTravel();
-        // to print the history
+    /**
+     * This method runs the final part of the system.
+     * Prints the history of the recorded trips.
+     */
+    private void afterReservationStage(){
+        HistoryManager historyManager = new HistoryManager();
+        DuringTravel duringTravel = new DuringTravel();
+
+        duringTravel.run();
         historyManager.run();
-
-        greetingsManager.showFareWellMessage();
     }
 }

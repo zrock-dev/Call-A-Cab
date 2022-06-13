@@ -5,13 +5,16 @@ import View.Utils.*;
 import static View.Utils.Decoration.decorationForMessage;
 
 /**
- * This class shows the start and trip's information.
- * This class shows the welcome with its borders and show the trip's information with its borders too.
+ * This is the greeting class.
+ * This class contains methods that display the startup message on program start
+ * and also display the completion message on program completion.
  */
 public class Greeting {
 
     /**
-     *This method shows the welcome message with its border.
+     * This method displays the welcome message,
+     * it has decorations for a more aesthetic visualization.
+     *
      */
     public void showWelcome(){
         System.out.println(Colors.CYAN+ "\n" +
@@ -26,7 +29,9 @@ public class Greeting {
     }
 
     /**
-     * This method shows the ending of the program.
+     * This method displays the message that ends the program,
+     * it has decorations for a more aesthetic visualization.
+     *
      */
     public void showFarewell(){
         System.out.println("\n" + Colors.CYAN +

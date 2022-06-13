@@ -4,13 +4,17 @@ import View.Utils.*;
 import static View.Utils.Decoration.decorationForMessage;
 
 /**
- *This class shows the menu of payment method.
+ * This is the menu payment class.
+ * This class has a method that shows us the available payment options.
+ *
  */
 public class MenuPayment {
 
 
     /**
-     * This method shows the menu of payment method, and its options.
+     * This method shows the menu of payment method.
+     * Our payment method are: Cash and Card,
+     * these have decorations for a more aesthetic visualization.
      */
     public void showMenu(){
         System.out.print(Colors.PURPLE + "\n"+

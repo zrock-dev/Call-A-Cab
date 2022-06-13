@@ -4,24 +4,29 @@ import java.sql.*;
 import static Model.Utils.*;
 
 /**
- *  This is the car class.
- *  This class returns the model ,color ,Licence Plate,Car type and car identification.
- *  And introduces information of the car.
+ *  This class contains methods that help us get the car information.
+ *
+ *  Contains attributes such as model, color, car type and license plate,
+ *  also obtains the information from the Car table in the database.
+ *
+ * @author
  */
-public class Car implements ObjectAppointable {
+public class Car implements Linkable, Populable {
     private int identifier;
     private String model, color, carType, licencePlate;
 
     /**
-     * This method returns the car's model.
-     * @return model
+     * This method gets the model of the car.
+     *
+     * @return model.
      */
     public String getModel() {
         return model;
     }
 
     /**
-     * This method return the car's color.
+     * This is the method get the color of the car
+     *
      * @return color
      */
     public String getColor() {
@@ -29,7 +34,8 @@ public class Car implements ObjectAppointable {
     }
 
     /**
-     * This method return the car's license plate.
+     * This is the method get the license plate of the car
+     *
      * @return licensePlate
      */
     public String getLicencePlate() {
@@ -37,7 +43,8 @@ public class Car implements ObjectAppointable {
     }
 
     /**
-     *This method return the car's type.
+     * This is the method get the car type of the car
+     *
      * @return carType
      */
     public String getCarType() {
@@ -45,12 +52,14 @@ public class Car implements ObjectAppointable {
     }
 
     /**
-     * This method return the car's Identification.
+     * This is the method get the car identification.
+     *
      * @return carIdentification
      */
     public int getIdentifier() {
         return identifier;
     }
+
 
     @Override
     public void makeAppointment(int tripTicket){

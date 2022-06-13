@@ -6,30 +6,39 @@ import java.util.ArrayList;
 import static Model.Utils.*;
 
 /**
- * This class assigns a Taxi to  a trip.
- * This class assigns a taxi driver and a car to a trip, gets a travel identifier,
- * Set the total Price and generates a ticket.
+ *  This class contains methods that help us get the Trip information.
+ *
+ *  Contains attributes such as model, color, car type and license plate,
+ *  also obtains the information from a specific Trip table row in the database.
+ *
+ * @author
  */
+
 public class TaxiTrip {
     private int tripsRecorded;
 
-    public void appointTaxi(ArrayList<ObjectAppointable> taxiComponents){
+    /**
+     * This method just calls the makeAppointment from the linkable classes to
+     * establish the relation between tables.
+     *
+     * @see Linkable
+     * @param taxiComponents An arrayList composed by: the details about the travel, driver and car.
+     */
+    public void appointTaxi(ArrayList<Linkable> taxiComponents){
         int taxiTicket = generateTicket();
-        if (taxiTicket == 0){
-            System.out.println("\n\n Error not working \n\n");
-        }
-        for (ObjectAppointable item:
+        for (Linkable classTable:
              taxiComponents) {
-            item.makeAppointment(taxiTicket);
+            classTable.makeAppointment(taxiTicket);
         }
-//        taxiComponents.iterator()
-//                .next()
-//                .makeAppointment(taxiTicket);
     }
 
-//Pendent
     /**
+     * Creates a Trip row to be filled with related tables identifiers.
      *
+     * By calling the generateTicket procedure we create a row and then
+     * get the identifier of that row.
+     *
+     * @return row identifier as integer.
      */
     public int generateTicket(){
         int ticket = 0;
@@ -46,11 +55,17 @@ public class TaxiTrip {
         return ticket;
     }
 
+    /**
+     * The method makes a query with INNER JOINs to get records from the
+     * scheduled trips.
+     * 
+     * @return The query result as ResultSet type.
+     */
     public ResultSet enableHistoryMode(){
         ResultSet resultSet = null;
         String query =
-                "SELECT Trips.id, driver.first_name, driver.last_name,Ti.customer_location," +
-                        " Ti.arrive_destination, Ti.total_price " +
+                "SELECT car.id, driver.first_name, driver.last_name, Ti.customer_location, " +
+                        "Ti.arrive_destination, Ti.total_price " +
                         "FROM Trips " +
                         "INNER JOIN Car car on Trips.car_id = car.id " +
                         "INNER JOIN Driver driver on Trips.driver_id = driver.id " +

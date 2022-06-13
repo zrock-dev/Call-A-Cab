@@ -5,11 +5,12 @@ import java.sql.*;
 import static Model.Utils.*;
 
 /**
- * This is the Taxi driver class.
- * This class returns the first name, last name, phone number and gender of taxi driver.
- * And introduces information of the taxi driver.
+ *  This is the taxi driver class.
+ *
+ *  This class contains methods that help us get the taxi driver information.
+ *  also gets the data from a Driver row in database.
  */
-public class TaxiDriver implements ObjectAppointable {
+public class TaxiDriver implements Linkable, Populable {
     private String firstName;
     private String lastName;
     private int phoneNumber;
@@ -17,32 +18,36 @@ public class TaxiDriver implements ObjectAppointable {
     private int identifier;
 
     /**
-     * This method return the driver's first name.
-     * @return firstName
+     * This is the method gets the first name of the taxi driver.
+     *
+     * @return taxi driver's firstName.
      */
     public String getFirstName() {
         return firstName;
     }
 
     /**
-     * This method return the driver's last name.
-     * @return lastName
+     * This is the method gets the last name of the taxi driver.
+     *
+     * @return taxi driver's last name.
      */
     public String getLastName() {
         return lastName;
     }
 
     /**
-     * This method return the driver's phone number.
-     * @return phoneNumber
+     * This is the method gets the phone number of the taxi driver.
+     *
+     * @return taxi driver's phoneNumber.
      */
     public int getPhone() {
         return phoneNumber;
     }
 
     /**
-     * This method return the driver's gender.
-     * @return gender
+     * This is the method gets the gender of the taxi driver.
+     *
+     * @return taxi driver's gender.
      */
     public String getGender() {
         return gender;

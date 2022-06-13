@@ -5,11 +5,12 @@ import java.sql.*;
 import static Model.Utils.*;
 
 /**
- * This class sets and returns all the travel's details.
- * Returns Customer Location, Arrive Destination and N° passengers.
- * Sets Customer locations, Arrive Destination and N° passengers.
+ * This class contains methods that help us get the driver information.
+ *
+ * Contains attributes such as model, color, car type and
+ * also obtains the information from the driver database.
  */
-public class TravelDetails implements ObjectAppointable {
+public class TravelDetails implements Linkable {
     private String customerLocation, arriveDestination;
     private int noPassengers;
     private double totalPrice;
@@ -32,7 +33,7 @@ public class TravelDetails implements ObjectAppointable {
     }
 
     /**
-     * This method returns N° passengers.
+     * This method returns N° of passengers.
      * @return noPassengers
      */
     public int getNoPassengers() {
@@ -71,11 +72,10 @@ public class TravelDetails implements ObjectAppointable {
         this.totalPrice = totalPrice;
     }
 
-    //Pendent
     /**
+     * This method obtains the identifier of the current in the Travel_details row in use.
      *
      */
-
     protected void obtainIdentifier(){
         try{
             Statement statement = dataBaseConnection.createStatement();
@@ -89,6 +89,12 @@ public class TravelDetails implements ObjectAppointable {
         }
     }
 
+    /**
+     * Uploads the inputted details to the table Travel_details.
+     *
+     * The filled fields in the class are uploaded to the mentioned table
+     * by a INSERT INTO statement.
+     */
     public void uploadTravelDetails(){
         String query =
                 "INSERT INTO Travel_details " +
@@ -111,10 +117,5 @@ public class TravelDetails implements ObjectAppointable {
     public void makeAppointment(int tripTicket) {
         obtainIdentifier();
         updateTicket("travel_details_id", identifier, tripTicket);
-    }
-
-    @Override
-    public void populate() {
-        // do shit
     }
 }

@@ -4,13 +4,17 @@ import View.Utils.*;
 import static View.Utils.Decoration.decorationForMessage;
 /**
  *This class shows the change menu.
- *This class shows the change menu, reinsert information, enough cars message, and extras.
+ *
+ *This class shows the change menu, reinsert information,
+ * enough cars message, and extras.
  */
 public class OptionInformation {
 
     /**
-     * This method show the menu of changes.
-     * Location, Arrive place and N° passengers.
+     * This method shows what information the user wants to change.
+     *
+     * This method displays the available options that
+     * you can change before sending the data to the program.
      */
     public void informationToChange() {
         System.out.print(Colors.RESET + "\n╔" +
@@ -25,7 +29,11 @@ public class OptionInformation {
     }
 
     /**
-     * This method shows to reinsert information message.
+     * This method is for entering new information.
+     *
+     * This method displays the message so we
+     * can insert new information, which the user
+     * wants to re-enter
      */
     public void askForNewInformation() {
         System.out.print(Colors.RESET + "\n" +
@@ -38,7 +46,10 @@ public class OptionInformation {
     }
 
     /**
-     * This method shows a message when there are not enough cars.
+     * This method is for cars not available.
+     *
+     * displays the message to inform the user that there are
+     * no cars available.
      */
     public void cabUnavailable() {
         System.out.println(Colors.RED + "\n" +
@@ -52,7 +63,10 @@ public class OptionInformation {
     }
 
     /**
-     * This method shows a message asking customer to search a new car.
+     * This method is to display a message to try again.
+     *
+     * This method displays the message to ask if you want
+     * to try ordering a car again,
      */
     public void tryAgain(){
         System.out.print(Colors.YELLOW_BOLD+ "\n" +
@@ -64,7 +78,9 @@ public class OptionInformation {
     }
 
     /**
-     *This method shows a message when the customer write a different letter.
+     * This method shows if it is out of range.
+     * This method displays the message when a correct
+     * option is not entered.
      */
     public void numberOutOfRange() {
         System.out.print("\n" + Colors.RED +
@@ -74,7 +90,11 @@ public class OptionInformation {
     }
 
     /**
-     * This method shows a menu to choose an option in it.
+     *This method is the option to give advice or criticism.
+     *
+     * This method returns an option that the user can
+     * enter as advice or criticism, it also has an option
+     * to exit.
      */
     public void tipsAndCritiques() {
         System.out.print(Colors.BLUE + "\n" +
